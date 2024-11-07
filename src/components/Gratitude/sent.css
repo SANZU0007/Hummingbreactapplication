@@ -1,0 +1,11 @@
+.rececive-messages-list{
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+}
+
+.message-item{
+  margin: 10px;
+  width: auto !important;
+  text-align: start;
+}
