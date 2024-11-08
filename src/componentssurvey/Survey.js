@@ -3,15 +3,12 @@ import React, { useEffect, useState } from 'react';
 import SurveyAnswerForm from './SurveyAnswerForm';
 import { useNavigate } from 'react-router-dom';
 import {
-  Container,
   Typography,
   Button,
-  List,
-  ListItem,
   ListItemText,
   CircularProgress,
   Alert,
-} from '@mui/material'; // Import MUI components
+} from '@mui/material';
 import './style/survey.css';
 
 import { fetchAllSurveys } from '../ApiService/api';

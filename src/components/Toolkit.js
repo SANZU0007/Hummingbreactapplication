@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import '../styles/toolkit.css'; // Assuming your CSS is in sidebar.css
-import Positivity from './Positivity';
-import Engagement from './Engagement';
-import Relationship from './Relationship';
-import Meaning from './Meaning';
 import Graphs from './Graphs'
 import UserNavbar from './navbars/UserNavbar';
 import Survey from '../componentssurvey/Survey';
@@ -39,14 +35,8 @@ const Toolkit = () => {
 
       {activeComponent === 'AllSurveys' && <Survey />} 
 
-
-
         {/* Rendering components based on the activeComponent state */}
         {activeComponent === 'Graphs' && <Graphs />}
-        {activeComponent === 'Positivity' && <Positivity />}
-        {activeComponent === 'Engagement' && <Engagement />}
-        {activeComponent === 'Relationship' && <Relationship />}
-        {activeComponent === 'Meaning' && <Meaning />}
         {activeComponent === 'CheckIn' && <CheckInMap />}
       </div>
     </div>

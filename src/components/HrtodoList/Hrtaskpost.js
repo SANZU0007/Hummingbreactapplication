@@ -13,6 +13,7 @@ import Snackbar from '@mui/material/Snackbar'; // Import Snackbar
 import Alert from '@mui/material/Alert'; // Import Alert
 import "./hrtask.css";
 import { useAuth } from '../../utils/auth';
+import { apiUrl } from '../../api';
 
 const Hrtaskpost = ({ employees, setEmployees }) => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/employees');
+        const response = await axios.get(`${apiUrl}/api/employees`);
         setEmployees(response.data);
         setLoading(false);
       } catch (err) {

@@ -4,6 +4,7 @@ import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfi
 import MoodBadOutlinedIcon from '@mui/icons-material/MoodBadOutlined'; // Sad
 import { Slider } from '@mui/material';
 import axios from 'axios';
+import { apiUrl } from '../../api';
 
 const UserFresh = ({ checkInData, employeeId,  }) => {
 
@@ -15,7 +16,7 @@ const UserFresh = ({ checkInData, employeeId,  }) => {
 
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/attendance/checkin/${employeeId}`
+        `${apiUrl}/api/attendance/checkin/${employeeId}`
       );
       console.log(response.data.userMood); // Log response data for debugging
       setMood(response.data.userMood);
@@ -48,7 +49,7 @@ useEffect(()=>{
   const handleMoodChangeCommitted = async (event, newValue) => {
     
       try {
-        await axios.put("http://localhost:4000/api/attendance/update-mood", {
+        await axios.put(`${apiUrl}/api/attendance/update-mood`, {
           employeeId,
           mood: newValue,
         });

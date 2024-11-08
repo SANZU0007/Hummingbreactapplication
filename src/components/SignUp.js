@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/signup.css';
+import { apiUrl } from '../api';
 
 function SignUp() {
   const [userData, setUserData] = useState({
@@ -42,7 +43,7 @@ function SignUp() {
     }
     
     try {
-      const response = await axios.post('http://localhost:4000/api/users/register', userData);
+      const response = await axios.post(`${apiUrl}/api/users/register`, userData);
      
         navigate('/login');
     

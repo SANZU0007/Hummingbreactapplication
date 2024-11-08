@@ -11,6 +11,7 @@ import DiallyLoginMap from "./HrtodoList/DialyAttendanceMap";
 import MonthlyLoginMap from "./HrtodoList/MonthlyAttendanceMap";
 import DailyMapUserMood from "./HrtodoList/DailyMapUserMood";
 import UserMoodAllDay from "./CheckIn&moodmap/UserMoodAllDay";
+import UserMoodOnDate from "./CheckIn&moodmap/UserMoodOnDate";
 
 function HRLeavesAndAttendance({ employees }) {
   const [currentTime, setCurrentTime] = useState("");
@@ -179,7 +180,7 @@ function HRLeavesAndAttendance({ employees }) {
           todayRecord &&
           todayRecord.checkOut &&
           parseTimeString(todayRecord.checkOut).getTime() <
-            parseTimeString("06:00 PM").getTime()
+          parseTimeString("06:00 PM").getTime()
         ) {
           status = "Early Departure";
         }
@@ -222,11 +223,9 @@ function HRLeavesAndAttendance({ employees }) {
 
       // Time formatting
       const ampm = now.getHours() >= 12 ? "PM" : "AM";
-      const timeString = `${now.getHours() % 12 || 12}:${
-        now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes()
-      }:${
-        now.getSeconds() < 10 ? `0${now.getSeconds()}` : now.getSeconds()
-      } ${ampm}`;
+      const timeString = `${now.getHours() % 12 || 12}:${now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes()
+        }:${now.getSeconds() < 10 ? `0${now.getSeconds()}` : now.getSeconds()
+        } ${ampm}`;
       setCurrentTime(timeString);
 
       // Date formatting
@@ -271,18 +270,12 @@ function HRLeavesAndAttendance({ employees }) {
     }
   }, [tabelRawData, checkIn, checkOut, curDate, curDept, nameSearch]);
 
-
-
-
-
-
-
   const [selectedOption, setSelectedOption] = useState("day");
 
   const handleButtonClick = (option) => {
-      setSelectedOption(option);
+    setSelectedOption(option);
   };
-  
+
   return (
     <div
       style={{ backgroundColor: "#002525" }}
@@ -310,185 +303,47 @@ function HRLeavesAndAttendance({ employees }) {
             </button>
           </div>
         </div>
-        {/* <div className='attendance-status'>
-          <div className='attendance-employee-stats'>
-            <div className='attendance-employee-content'>
-              <div className='attendance-employee-number'>{userData.totalEmployee}</div>
-              <div className='attendance-employee-label'>Total Employee</div>
-            </div>
-            <div>
-              <img src="../images/total-employee.svg" className='attendance-employee-img'/>
-            </div>
-          </div>
-
-          <div className='attendance-employee-stats'>
-            <div className='attendance-employee-content'>
-              <div className='attendance-employee-number'>{userData.onTime}</div>
-              <div className='attendance-employee-label'>On Time</div>
-            </div>
-            <div>
-              <img src="../images/total-employee.svg" className='attendance-employee-img'/>
-            </div>
-          </div>
-
-          <div className='attendance-employee-stats'>
-            <div className='attendance-employee-content'>
-              <div className='attendance-employee-number'>{userData.absent}</div>
-              <div className='attendance-employee-label'>Absent</div>
-            </div>
-            <div>
-              <img src="../images/total-employee.svg" className='attendance-employee-img'/>
-            </div>
-          </div>
-
-          <div className='attendance-employee-stats'>
-            <div className='attendance-employee-content'>
-              <div className='attendance-employee-number'>{userData.lateArrival}</div>
-              <div className='attendance-employee-label'>Late Arrival</div>
-            </div>
-            <div>
-              <img src="../images/total-employee.svg" className='attendance-employee-img'/>
-            </div>
-          </div>
-
-          <div className='attendance-employee-stats'>
-            <div className='attendance-employee-content'>
-              <div className='attendance-employee-number'>{userData.earlyDeparture}</div>
-              <div className='attendance-employee-label'>Early Departure</div>
-            </div>
-            <div>
-              <img src="../images/total-employee.svg" className='attendance-employee-img'/>
-            </div>
-          </div>
-
-          <div className='attendance-employee-stats'>
-            <div className='attendance-employee-content'>
-              <div className='attendance-employee-number'>1</div>
-              <div className='attendance-employee-label'>time-off</div>
-            </div>
-            <div>
-              <img src="../images/total-employee.svg" className='attendance-employee-img'/>
-            </div>
-          </div>
-        </div> */}
-
         <br></br>
         <Info employees={employees} />
 
         <Container>
-    {/* Toggle Button Group */}
-    <ButtonGroup className="button-group">
-        <Button
-         color="success"
-            
-            variant={selectedOption === "day" ? "contained" : "outlined"}
-            onClick={() => handleButtonClick("day")}
-        >
-            Day
-        </Button>
-        <Button
-            color="success"
-            variant={selectedOption === "week" ? "contained" : "outlined"}
-            onClick={() => handleButtonClick("week")}
-        >
-            Week
-        </Button>
-        <Button
-          color="success"
-            variant={selectedOption === "month" ? "contained" : "outlined"}
-            onClick={() => handleButtonClick("month")}
-        >
-            Month
-        </Button>
-    </ButtonGroup>
+          {/* Toggle Button Group */}
+          <ButtonGroup className="button-group">
+            <Button
+              color="success"
 
-    {/* Conditionally render components */}
-    {selectedOption === "day" && <DiallyLoginMap employees={employees} />}
-    {selectedOption === "week" && <WeeklyUserLoginMap employees={employees} />}
-    {selectedOption === "month" && <MonthlyLoginMap employees={employees} />}
-</Container>
+              variant={selectedOption === "day" ? "contained" : "outlined"}
+              onClick={() => handleButtonClick("day")}
+            >
+              Day
+            </Button>
+            <Button
+              color="success"
+              variant={selectedOption === "week" ? "contained" : "outlined"}
+              onClick={() => handleButtonClick("week")}
+            >
+              Week
+            </Button>
+            <Button
+              color="success"
+              variant={selectedOption === "month" ? "contained" : "outlined"}
+              onClick={() => handleButtonClick("month")}
+            >
+              Month
+            </Button>
+          </ButtonGroup>
 
-<UserMoodAllDay  employees={employees} />
+          {/* Conditionally render components */}
+          {selectedOption === "day" && <DiallyLoginMap employees={employees} />}
+          {selectedOption === "week" && <WeeklyUserLoginMap employees={employees} />}
+          {selectedOption === "month" && <MonthlyLoginMap employees={employees} />}
+        </Container>
+
+        <UserMoodAllDay employees={employees} />
+        <UserMoodOnDate employees={employees} />
       </div>
     </div>
   );
 }
 
 export default HRLeavesAndAttendance;
-
-// <div className='attendance-overview'>
-// <div className='search-bar-container'>
-//   <div className='attendance-search-heading'>Attendance Overview</div>
-//   <input
-//     type="text"
-//     className='search-bar-attendance'
-//     placeholder='Quick Search'
-//     value={nameSearch}
-//     onChange={(e) => setNameSearch(e.target.value)}
-//   />
-//   <DatePicker
-//       selected={curDate}
-//       onChange={handleCurDateChange}
-//       dateFormat="MM/dd/yyyy"
-//       className='date-picker attendance-table-date'
-//     />
-//     <button className='view-attendance-btn'>
-//       <img src="../images/view-attendance.svg" className='view-attendance-img'/>
-//       View Attendance
-//     </button>
-// </div>
-// <div className='attendance-table'>
-//   <div className='row attendance-table-header'>
-//     <div className='attendance-employee-id  col-2'>ID</div>
-//     <div className='attendance-employee-name col-1'>Employee</div>
-//     {/* <div className='col-2'>Role</div> */}
-//     <div className="attendance-employee-dept col-1">
-//       <select
-//         id="department-select"
-//         value={curDept}
-//         onChange={handleDeptChange}
-//         className="attendance-table-dropdowns"
-//       >
-//         <option value="AllDepts." className='dept-select-opt'>All Departments</option>
-//         <option value="Development" className='dept-select-opt'>Development</option>
-//         <option value="Design" className='dept-select-opt'>Design</option>
-//         <option value="Management" className='dept-select-opt'>Management</option>
-//         <option value="Team" className='dept-select-opt'>Team</option>
-//       </select>
-//     </div>
-//     <div className='attendance-employee-date col-1'>
-//       Date
-//     </div>
-//     <div className='  attendance-employee-status col-1'>
-//       <select className='attendance-table-dropdowns attendance-employee-status' value={status} onChange={handleStatusChange}>
-//         <option value="Status" disabled>Status</option>
-//         <option value="Absent">Absent</option>
-//         <option value="Late Arrival">Late Arrival</option>
-//         <option value="Early Departure">Early Departure</option>
-//       </select>
-//     </div>
-//     <div className='attendance-employee-checkIn d-flex flex-column align-items-start col-1'>
-//       Check In
-//     </div>
-
-//     <div className='attendance-employee-checkOut d-flex flex-column align-items-start col-1'>
-//       Check Out
-//     </div>
-//     <div className='attendance-employee-workHours col-1'>Work Hours</div>
-//   </div>
-//   <div className='attendance-table-rows'>
-//       {tableRows.map((row) => (
-//       <div key={row.id} className='attendance-table-row row'>
-//       <div className='attendance-employee-id col-2'>{row.id.substring(0, 10)}</div>
-//       <div className='attendance-employee-name col-1'>{row.empName}</div>
-//       <div className='attendance-employee-dept col-1'>{row.dept}</div>
-//       <div className='attendance-employee-date col-1'>{row.date}</div>
-//       <div className='attendance-employee-status col-1'>{row.status}</div>
-//       <div className='attendance-employee-checkIn col-1'>{row.checkIn}</div>
-//       <div className='attendance-employee-checkOut col-1'>{row.checkOut}</div>
-//       <div className='attendance-employee-workHours col-1'>{row.workHours}</div>
-//     </div>
-//   ))}
-//   </div>
-// </div>
-// </div>

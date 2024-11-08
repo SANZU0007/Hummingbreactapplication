@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Notice.css";
-
+import { apiUrl } from '../../api';
 import {
-  Paper,
-  Typography,
   IconButton,
   List,
   ListItem,
@@ -19,7 +17,7 @@ const NoticeBoard = () => {
   // Function to fetch all notices from the API
   const fetchNotices = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/feedback');
+      const response = await axios.get(`${apiUrl}/api/feedback`);
       setNotices(response.data);
     } catch (error) {
       console.error('Error fetching notices:', error);

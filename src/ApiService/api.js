@@ -1,12 +1,13 @@
 import axios from 'axios';
+import { apiUrl } from '../api';
 
 export const EditAllGoals = async (goalId, updatedGoal) => {
-  const response = await axios.put(`http://localhost:4000/tasks/updateTask/${goalId}`, updatedGoal); // Adjust the endpoint as necessary
+  const response = await axios.put(`${apiUrl}/tasks/updateTask/${goalId}`, updatedGoal); // Adjust the endpoint as necessary
   return response.data; // Return the updated goal data or any relevant info
 };
 
 export const deleteAllGoals = async (goalId) => {
-  const response = await axios.delete(`http://localhost:4000/tasks/deleteTask/${goalId}`,); // Adjust the endpoint as necessary
+  const response = await axios.delete(`${apiUrl}/tasks/deleteTask/${goalId}`,); // Adjust the endpoint as necessary
   return response.data; // Return the updated goal data or any relevant info
 };
 
@@ -15,19 +16,19 @@ export const deleteAllGoals = async (goalId) => {
 
 
 
-const API_URL = 'http://localhost:4000/api/goals'; // Replace with your actual API endpoint
+const API_URL = `${apiUrl}/api/goals`; // Replace with your actual API endpoint
 
 // Function to fetch all goals
 export const fetchAllTask = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/tasks/all");
+    const response = await axios.get(`${apiUrl}/tasks/all`);
     return response.data; // Return the fetched data
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : error.message);
   }
 };
 
-const API_URL_User = "http://localhost:4000/api/users/"
+const API_URL_User = `${apiUrl}/api/users/`
 
 
 
@@ -50,18 +51,6 @@ export const fetchAllUsers = async () => {
     throw new Error(error.response ? error.response.data.message : error.message);
   }
 };
-
-// // Function to edit/update a goal
-// export const EditAllGoals = async (goal, updatedGoal) => {
-//   try {
-//     // Use template literals to correctly build the URL
-//     const response = await axios.put(`${API_URL}/${goal._id}`, updatedGoal);
-//     return response.data; // Return the updated data
-//   } catch (error) {
-//     throw new Error(error.response ? error.response.data.message : error.message);
-//   }
-// };
-
 
 // Function to edit/update a goal
 export const PostAllGoals = async (newGoals) => {
@@ -94,7 +83,7 @@ export const deleteGoal = async (goalId) => {
 
   // Function to edit/update a goal
 
-const API_URL_CheckIn = "http://localhost:4000/api/attendance"
+const API_URL_CheckIn = `${apiUrl}/api/attendance`
 
 export const checkInFunc = async (time) => {
   try {
@@ -118,7 +107,7 @@ export const TodayLoginUsers = async () => {
 
 
 
-const MapUrls = "http://localhost:4000/api/attendance/"
+const MapUrls = `${apiUrl}/api/attendance/`
 
 
 export const EveryDayAttendance = async () => {
@@ -182,7 +171,7 @@ export const LoginUser = async (payload) => {
   }
 };
 
-const API_URLs = 'http://localhost:4000'; // Replace with your actual API endpoint
+const API_URLs = `${apiUrl}`; // Replace with your actual API endpoint
 
 
 // Function to fetch all surveys
@@ -205,7 +194,7 @@ export const fetchAllAnswer = async () => {
   }
 };
 
-const API_URLAllUsers = 'http://localhost:4000'; // Replace with your actual API endpointapi/employees
+const API_URLAllUsers = `${apiUrl}`; // Replace with your actual API endpointapi/employees
 
 
 

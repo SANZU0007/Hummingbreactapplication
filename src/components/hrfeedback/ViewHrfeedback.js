@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import DeleteIcon from '@mui/icons-material/Delete'; // Import Delete icon
+import { apiUrl } from '../../api';
 
 const ViewHrfeedback = ({}) => {
   const [feedbackList, setFeedbackList] = useState([]);
@@ -18,7 +19,7 @@ const ViewHrfeedback = ({}) => {
   // Function to fetch all feedback from the API
   const fetchAllFeedback = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/feedback');
+      const response = await axios.get(`${apiUrl}/api/feedback`);
       setFeedbackList(response.data);
     } catch (error) {
       console.error('Error fetching feedback:', error);
@@ -42,7 +43,7 @@ const ViewHrfeedback = ({}) => {
   const togglePinFeedback = async (id, currentStatus) => {
     try {
       const newStatus = !currentStatus; // Toggle the current status
-      await axios.put(`http://localhost:4000/api/feedback/${id}`, {
+      await axios.put(`${apiUrl}/api/feedback/${id}`, {
         messageStatus: newStatus,
       });
       fetchAllFeedback(); // Refresh the feedback list after updating
@@ -54,7 +55,7 @@ const ViewHrfeedback = ({}) => {
   // Function to delete feedback
   const deleteFeedback = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/feedback/${id}`);
+      await axios.delete(`${apiUrl}/api/feedback/${id}`);
       fetchAllFeedback(); // Refresh the feedback list after deletion
     } catch (error) {
       console.error('Error deleting feedback:', error);

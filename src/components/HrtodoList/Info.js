@@ -23,17 +23,6 @@ const Info = ({ employees}) => {
   const [lateArrivalCount, setLateArrivalCount] = useState(0);
   const [onTimeCount, setOnTimeCount] = useState(0); // State for On Time count
 
-
-
-//   const fetchNormaluser = async () => {
-//     try {
-//       const response = await fetchNormalUser();
-//       setUser(response);
-//     } catch (error) {
-//       console.error("Failed to fetch normal user data:", error);
-//     }
-//   };
-
   const fetchTodayLogin = async () => {
     try {
       const response = await TodayLoginUsers();

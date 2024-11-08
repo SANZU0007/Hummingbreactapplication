@@ -1,23 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import MoodGraph from './MoodGraph';
-import { UserContext } from '../../App';
+import { apiUrl } from '../../api';
 
 const CheckInMap = () => {
   const [checkInData, setCheckInData] = useState([]);
   const [error, setError] = useState(null);
-
-
-  const { userDetails } = useContext(UserContext);
-
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const fetchCheckInData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/attendance/singleUser/${user._id}`);
+        const response = await axios.get(`${apiUrl}/api/attendance/singleUser/${user._id}`);
         setCheckInData(response.data);
       } catch (err) {
         console.error("Error fetching check-in data:", err);

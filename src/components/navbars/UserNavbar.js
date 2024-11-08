@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-
 import {
   Box,
   Drawer,
@@ -10,16 +9,10 @@ import {
   Typography,
   IconButton,
   List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
 } from '@mui/material';
-import AppsIcon from '@mui/icons-material/Apps';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'; // Importing Admin Panel Icon
 import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -93,9 +86,6 @@ export default function UserNavbar({activeComponent ,loadComponent}) {
     navigate('/admin'); // Change this path as needed
   };
 
-
-
-
   return (
     <Box id="maintemplate" sx={{ display: 'flex', backgroundColor: "#002525" }}>
       <CssBaseline />
@@ -139,38 +129,12 @@ export default function UserNavbar({activeComponent ,loadComponent}) {
           {/* Buttons to switch between components */}
           <div className={`toolkit-sidebar-link ${activeComponent === 'Dashboard' ? 'active' : ''}`} onClick={() => loadComponent('Graphs')}>Dashboard</div>
           <div className={`toolkit-sidebar-link ${activeComponent === 'CheckIn' ? 'active' : ''}`} onClick={() => loadComponent('CheckIn')}> CheckIn</div>
-        
-          <div className={`toolkit-sidebar-link ${activeComponent === 'Positivity' ? 'active' : ''}`} onClick={() => loadComponent('Positivity')}>Positivity</div>
-          <div className={`toolkit-sidebar-link ${activeComponent === 'Engagement' ? 'active' : ''}`} onClick={() => loadComponent('Engagement')}>Engagement</div>
-          <div className={`toolkit-sidebar-link ${activeComponent === 'Relationship' ? 'active' : ''}`} onClick={() => loadComponent('Relationship')}>Relationship</div>
-          <div className={`toolkit-sidebar-link ${activeComponent === 'Meaning' ? 'active' : ''}`} onClick={() => loadComponent('Meaning')}>Meaning</div>
-      
+              
           <div className={`toolkit-sidebar-link ${activeComponent === 'AllSurveys' ? 'active' : ''}`} onClick={() => loadComponent('AllSurveys')}>Fill Survey</div>
-      
-         
-      
-          
       
         </div>
         <div className="sidebar-logout">Logout</div>
   
-
-
-     
-
-{/* {user.role === 'admin' && 
-<>
-<ListItem button onClick={handleAdminPanelClick}>
-            <ListItemIcon>
-              <AdminPanelSettingsIcon style={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary="Admin Panel" />
-          </ListItem>
-</>} */}
-         
-
-
-          
         </List>
       </Drawer>
       <Main open={open} />

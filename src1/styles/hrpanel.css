@@ -1,0 +1,93 @@
+
+
+ 
+  
+
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-topcontent{
+    width: 100%;
+  }
+   
+ 
+  .sidebar-title{
+    font-size: 24px;
+    margin: 0px 0 100px;
+    text-align: center;
+  }
+  
+  .sidebar-links{
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 5px 0;
+    text-align: left;
+    padding: 10px 0 10px 45px;
+  }
+  
+
+  
+  .active-compo{
+    background-color: #008080;
+    color: white;
+  }
+
+  .sidebar-logout{
+    text-align: left;
+    width: 100%;
+    padding-left: 45px;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex; /* Ensure the content stretches */
+    flex-direction: column;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+    background-color: #002525;
+
+    overflow: scroll;
+  }
+
+  .main-content ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .main-content .toggle-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #0000003f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 1100;
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar.open ~ .main-content {
+    margin-left: 250px;
+  }
+  
+  .main-content .toggle-button {
+    left: 10px;
+  }
+  
+  .sidebar.open ~ .main-content .toggle-button {
+    left: 260px;
+  }
+  
+  .dashboard-container {
+    width: 100%;
+    padding: 50px 100px;
+    background-color: #002525;
+    color: white;
+  }
+  

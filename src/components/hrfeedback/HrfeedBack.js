@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import "./hrfeedback.css";
 import ViewHrfeedback from './ViewHrfeedback';
+import { apiUrl } from '../../api';
 
 export const HrfeedBack = () => {
   const [personId] = useState('user123'); // Default person ID, can be dynamic if needed
@@ -41,7 +42,7 @@ export const HrfeedBack = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/api/feedback', feedbackPayload);
+      const response = await axios.post(`${apiUrl}/api/feedback`, feedbackPayload);
       setSnackbarMessage(`${response.data.message} posted successfully`);
       setSnackbarSeverity('success');
       setSnackbarOpen(true);

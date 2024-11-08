@@ -5,6 +5,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './receive.css'; // Optional: Create this CSS file for styling
 import { NavigateBefore, NavigateNext } from '@mui/icons-material';
+import { apiUrl } from '../../api';
 
 const Receive = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -16,7 +17,7 @@ const Receive = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/messages/receiving/${user._id}`);
+        const response = await axios.get(`${apiUrl}/api/messages/receiving/${user._id}`);
         setMessages(response.data);
       } catch (error) {
         console.error("Error fetching messages:", error);

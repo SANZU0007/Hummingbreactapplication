@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import MoodGraph from './MoodGraph';
-import AdminUserMood from './AdminUserMood';
+// import MoodGraph from './MoodGraph';
+// import AdminUserMood from './AdminUserMood';
+import { apiUrl } from '../../api';
 
 const UserMoodAllDay = ({ employees }) => {
     const [checkInData, setCheckInData] = useState([]);
@@ -12,7 +13,7 @@ const UserMoodAllDay = ({ employees }) => {
     useEffect(() => {
         const fetchCheckInData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/attendance/all-checkins/`);
+                const response = await axios.get(`${apiUrl}/api/attendance/all-checkins/`);
                 const formattedData = response.data.map(item => {
                     const matchedEmployee = employees.find(emp => emp._id === item.employeeId);
                     

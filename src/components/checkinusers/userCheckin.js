@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import "./CheckIn.css"
 import {
   Button,
-  Typography,
-  Grid,
   Snackbar,
   CircularProgress,
 } from "@mui/material";
@@ -13,6 +10,7 @@ import "./usercheck.css";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import { LogoutOutlined } from "@mui/icons-material";
 import UserFresh from "./UserFresh";
+import { apiUrl } from "../../api";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,7 +45,7 @@ const UserCheckInUsers = () => {
     setLoading(true); // Start loading
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/attendance/checkin",
+        `${apiUrl}/api/attendance/checkin`,
         {
           employeeId,
         }
@@ -75,7 +73,7 @@ const UserCheckInUsers = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/attendance/checkout",
+        `${apiUrl}/api/attendance/checkout`,
         {
           employeeId,
         }
@@ -93,15 +91,11 @@ const UserCheckInUsers = () => {
     }
   };
 
-
-
-
-
   const fetchCheckInByUser = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/attendance/checkin/${employeeId}`
+        `${apiUrl}/api/attendance/checkin/${employeeId}`
       );
       console.log(response.data); // Log response data for debugging
       setCheckInData(response.data);
@@ -156,10 +150,7 @@ const UserCheckInUsers = () => {
         )}
       </Button>
 
- 
-
        <UserFresh fetchCheckInByUser={fetchCheckInByUser }  employeeId={employeeId} checkInData={checkInData}/>
-   
 
       <Button
         size="small"
@@ -188,23 +179,6 @@ const UserCheckInUsers = () => {
           </span>
         )}
       </Button>
-
-      {/* {checkInData && (
-        <div className="check-in-details">
-          <div style={{ display: "flex", gap: "50px" }}>
-            <Typography className="detail-item">
-              Check-in Time:{" "}
-              {new Date(checkInData.checkIn).toLocaleTimeString()}
-            </Typography>
-            {checkInData.checkOut && (
-              <Typography className="detail-item">
-                Check-out Time:{" "}
-                {new Date(checkInData.checkOut).toLocaleTimeString()}
-              </Typography>
-            )}
-          </div>
-        </div>
-      )} */}
 
       <Snackbar
         open={openSnackbar}

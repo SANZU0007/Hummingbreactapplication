@@ -28,7 +28,7 @@ function Requestleave() {
                         <div className='leave-date-title'>From Date*</div>
                         <DatePicker
                         selected={fromDate}
-                        onChange={(e) => setFromDate(e.target.value)}
+                        onChange={(e) => setFromDate(e.target?.value)}
                         dateFormat="MM/dd/yyyy"
                         className='date-picker leave-date-picker'
                         />
@@ -41,7 +41,7 @@ function Requestleave() {
                         <div className='leave-date-title'>To Date*</div>
                         <DatePicker
                         selected={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
+                        onChange={(e) => setEndDate(e.target?.value)}
                         dateFormat="MM/dd/yyyy"
                         className='date-picker leave-date-picker'
                         />

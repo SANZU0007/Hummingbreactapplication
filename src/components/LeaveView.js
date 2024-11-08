@@ -1,15 +1,8 @@
 import React from 'react'
 import "../styles/leaveview.css"
 import Person from '@mui/icons-material/Person';
-import { useAuth } from '../utils/auth';
-import { useNavigate } from 'react-router-dom';
-import { apiUrl } from '../api';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { FLASH_SUCCESS, FLASH_ERROR } from '../constants/actionTypes';
 import styled from 'styled-components';
 import { useState } from 'react';
-import DateTime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import DatePicker from 'react-datepicker';
 
@@ -23,50 +16,10 @@ function LeaveView() {
     const handleLeaveDateChange = (date) => {
         setLeaveDate(date);
     }
-  
-//     const navigate = useNavigate()
-//     const auth = useAuth()
-//     const userId = auth.loggedUser._id;
-//     const dispatch = useDispatch()
-
-//     const handleLogout = async () => {
-//       const config = {
-//           withCredentials: true,
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//         };
-  
-//       const {data} = await axios.post(`${apiUrl}/logout`, config)
-      
-//       if(data.type === 'success')
-//       auth.logOut()
-  
-//       if(data.type === "success"){
-//           dispatch({type:FLASH_SUCCESS, payload:data.message})
-//       }
-//       else
-//           dispatch({type:FLASH_ERROR, payload:data.message})
-  
-//       navigate('/', {replace: true})
-//   }
 
 
   return (
     <div className='leave-view-container'>
-        {/* <div class="hr-heading" style={{margin:"50px 0", padding:"0 100px"}}>
-            <div className='hr-heading-container' style={{margin:0}}>
-            <div class="hr-icon">HummingBEE</div>
-                <div class="lines">
-                <div class="hr-line"></div>
-                <div class="hr-line"></div>
-                <div class="hr-line"></div>
-                <div class="hr-line"></div>
-                <div class="hr-line"></div>
-                </div>
-                <a  className="ms-3 heading-hr-logout"><PersonIconI /></a>
-            </div>
-        </div> */}
         <div className='leave-view-header'>
             <div className='leave-view-heading'>Hi Arjuna <img style={{height:"45px", width:"45px", margin:"15px 0 0px 10px"}} src="../images/hand.png" /></div>
             <div className='leave-view-para'>We're thrilled to see you again. Dive into your personalized dashboard to explore your recent achievements, upcoming goal and insigts into your engagement and well-being. Let's continue to grow and succeed together!</div>

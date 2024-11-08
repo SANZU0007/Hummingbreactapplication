@@ -1,8 +1,6 @@
 import React , {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import RadioGroup from './RadioGroup'
 import "../styles/survey.css"
-import { surveys } from '../data/questions'
 import axios from 'axios';
 import { apiUrl } from '../api';
 import { useDispatch } from 'react-redux';
@@ -30,9 +28,9 @@ function Survey() {
     const auth = useAuth()
     let paraObj={};
 
-    Object.keys(surveys).forEach((key, index) => {
-        paraObj[index] = key;
-    })
+    // Object.keys(surveys).forEach((key, index) => {
+    //     paraObj[index] = key;
+    // })
 
 
     const handleRadioSelection = (index, value) => {
@@ -107,11 +105,10 @@ function Survey() {
             if( page == 3){
                 setSubmitFlag(true)
              }
-             else if(count == Object.keys(surveys[paraObj[page]]).length ){
-                 setNextFlag(false)
-                 setCount(0)
-            //  }
-        }
+            //  else if(count == Object.keys(surveys[paraObj[page]]).length ){
+            //      setNextFlag(false)
+            //      setCount(0)
+            // //  }
         
     },[graphData, page, count, selectedValues])
 
@@ -146,7 +143,7 @@ function Survey() {
             </div>
             <div className='survey-container' >
                 <form onSubmit={handleSubmit}>
-                    {
+                    {/* {
                         surveys[paraObj[page]].map((ques, index)=>{
                         return( 
                             
@@ -171,12 +168,12 @@ function Survey() {
                                 
                         )
                         })
-                    }
+                    } */}
                     <div className='d-flex jusitfy-content-start'>   
                         {
                             submitFlag?
-                                <button className={`submit-btn ms-3  ${count==surveys[paraObj[page]].length?"":"submit-btn-disabled"}`} type="submit" disabled={count==surveys[paraObj[page]].length?false:true}>Submit</button>:
-                                <button type='button' className={`submit-btn me-3 ${nextFlag? "submit-btn-disabled ":""}`} onClick={handleNextPage} disabled={nextFlag}>Next</button>                    
+                              // <button className={`submit-btn ms-3  ${count==surveys[paraObj[page]].length?"":"submit-btn-disabled"}`} type="submit" disabled={count==surveys[paraObj[page]].length?false:true}>Submit</button>:
+                                <button type='button' className={`submit-btn me-3 ${nextFlag? "submit-btn-disabled ":""}`} onClick={handleNextPage} disabled={nextFlag}>Next</button>:<></>
                         }
 
                     </div>

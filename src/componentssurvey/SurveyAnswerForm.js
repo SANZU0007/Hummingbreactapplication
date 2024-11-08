@@ -4,14 +4,13 @@ import {
   Snackbar,
   Alert,
   Button,
-  Typography,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormControl,
-  FormLabel
+  FormControl
 } from '@mui/material'; // Import Material-UI components
 import "./style/surveyanswer.css";
+import { apiUrl } from '../api';
 
 const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
   const [answers, setAnswers] = useState({});
@@ -41,7 +40,7 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
       };
 
       // Send the data using axios
-      const response = await axios.post('http://localhost:4000/api/answers', surveyResponse);
+      const response = await axios.post(`${apiUrl}/api/answers`, surveyResponse);
       console.log('Survey response submitted successfully:', response.data);
       
       // Show alert on success

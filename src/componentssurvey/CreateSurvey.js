@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./style/create.css";
 import { Button, Select, MenuItem } from '@mui/material';
+import { apiUrl } from '../api';
 
 const SurveyForm = () => {
   const [title, setTitle] = useState('');
@@ -44,7 +45,7 @@ const SurveyForm = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/api/surveys', surveyPayload);
+      const response = await axios.post(`${apiUrl}/api/surveys`, surveyPayload);
       console.log('Survey created successfully:', response.data);
       setOpenAlert(true);
       setTitle('');

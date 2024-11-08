@@ -19,13 +19,6 @@ const config = {
     }
 };
 
-const configtwo = {
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
 export const getTasks = (index) => async(dispatch) =>  {
     try{
         const {data} = await axios.get(`${apiUrl}/tasks/${index}`, config)

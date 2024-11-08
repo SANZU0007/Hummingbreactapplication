@@ -10,16 +10,10 @@ import {
   Typography,
   IconButton,
   List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
 } from '@mui/material';
-import AppsIcon from '@mui/icons-material/Apps';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'; // Importing Admin Panel Icon
 import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -68,14 +62,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navbar({activeComponent ,loadComponent}) {
+export default function Navbar({ activeComponent, loadComponent }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem('user')) || {};
 
   const handleDrawerToggle = () => setOpen((prevOpen) => !prevOpen);
-  
+
   const handleLogout = () => {
     // Clear local storage
     localStorage.clear();
@@ -84,7 +78,7 @@ export default function Navbar({activeComponent ,loadComponent}) {
   };
 
 
-  const handleDashBoard =() => {
+  const handleDashBoard = () => {
     navigate('/fetch-data'); // Change this path as needed
   }
 
@@ -92,9 +86,6 @@ export default function Navbar({activeComponent ,loadComponent}) {
     // Navigate to the admin panel
     navigate('/admin'); // Change this path as needed
   };
-
-
-
 
   return (
     <Box id="maintemplate" sx={{ display: 'flex', backgroundColor: "#002525" }}>
@@ -130,46 +121,19 @@ export default function Navbar({activeComponent ,loadComponent}) {
           </IconButton>
         </DrawerHeader>
         <List>
-        <div >
-        <div className='sidebar-content'>
-            <div className='sidebar-topcontent'>
+          <div >
+            <div className='sidebar-content'>
+              <div className='sidebar-topcontent'>
                 <div className='sidebar-title'>HummingBEE</div>
-                <div className='sidebar-links' style={{cursor:"default"}}>Menu</div>
-                <div className={`sidebar-links ${activeComponent=="HRDashboard"?'active-compo':''}`} onClick={() => loadComponent('HRDashboard')}>Dashboard</div>
-                <div className={`sidebar-links ${activeComponent=="HRLeavesAndAttendance"?'active-compo':''}`} onClick={() => loadComponent('HRLeavesAndAttendance')}>Leave & Attendance</div>
-           
-
-                <div className={`sidebar-links ${activeComponent=="CreateSurvey"?'active-compo':''}`} onClick={() => loadComponent('CreateSurvey')}> Create Survey</div>
-                
-           
-                <div className={`sidebar-links ${activeComponent=="AllSurveys"?'active-compo':''}`} onClick={() => loadComponent('AllSurveys')}>Survey Response</div>
-
-               
-           
+                <div className='sidebar-links' style={{ cursor: "default" }}>Menu</div>
+                <div className={`sidebar-links ${activeComponent == "HRDashboard" ? 'active-compo' : ''}`} onClick={() => loadComponent('HRDashboard')}>Dashboard</div>
+                <div className={`sidebar-links ${activeComponent == "HRLeavesAndAttendance" ? 'active-compo' : ''}`} onClick={() => loadComponent('HRLeavesAndAttendance')}>Leave & Attendance</div>
+                <div className={`sidebar-links ${activeComponent == "CreateSurvey" ? 'active-compo' : ''}`} onClick={() => loadComponent('CreateSurvey')}> Create Survey</div>
+                <div className={`sidebar-links ${activeComponent == "AllSurveys" ? 'active-compo' : ''}`} onClick={() => loadComponent('AllSurveys')}>Survey Response</div>
+              </div>
+              <div onClick={handleLogout} className='sidebar-logout'>Logout</div>
             </div>
-            <div onClick={handleLogout} className='sidebar-logout'>Logout</div>
-        </div>
-      
-      </div>
-
-
-
-
-     
-
-{/* {user.role === 'admin' && 
-<>
-<ListItem button onClick={handleAdminPanelClick}>
-            <ListItemIcon>
-              <AdminPanelSettingsIcon style={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary="Admin Panel" />
-          </ListItem>
-</>} */}
-         
-
-
-          
+          </div>
         </List>
       </Drawer>
       <Main open={open} />
