@@ -4,17 +4,17 @@ import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import "./css/userfresh.css"
 
 
-const WishingUser = () => {
+const WishingUser = ({activeComponent ,loadComponent}) => {
   return (
     <div className="wishing-user-container">
       <div className="wishing-message">
-        <p className='wishing-p'>Wishing You to be at Your Best Today</p>
+        <p className='wishing-p'>Wishing you to be at your best today</p>
       </div>
 
       <div className="user-info-container">
       <div className="user-info">
-        <PublishedWithChangesIcon className="info-icon" />
-        <p>Would Like More About You</p>
+        <PublishedWithChangesIcon className="info-icon" onClick={() => loadComponent('AllSurveys')} />
+        <p>Would  like to know more about you</p>
       </div>
       <div className="tips-section">
         <LightbulbIcon className="tips-icon" />

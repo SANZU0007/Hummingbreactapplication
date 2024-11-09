@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Snackbar,
   Alert,
   Button,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormControl
+  FormControl,
+  FormLabel,
+  Divider
 } from '@mui/material'; // Import Material-UI components
 import "./style/surveyanswer.css";
-import { apiUrl } from '../api';
 
 const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
   const [answers, setAnswers] = useState({});
   const [openAlert, setOpenAlert] = useState(false); // State for Snackbar visibility
+  const [openDialog, setOpenDialog] = useState(true); // Open dialog on load
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Track the current question index
 
   const handleAnswerChange = (questionId, value) => {
     setAnswers((prevAnswers) => ({
@@ -31,7 +38,7 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
         Title: selectedSurvey.title,
         userId: 1, // Use the user ID passed as a prop
         surveyId: selectedSurvey._id,
-        username: user ? user.username : 'Unknown User',
+        username: 'Unknown User',
         questions: selectedSurvey.questions.map((q) => ({
           questionId: q.questionId,
           text: q.text,
@@ -40,15 +47,16 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
       };
 
       // Send the data using axios
-      const response = await axios.post(`${apiUrl}/api/answers`, surveyResponse);
+      const response = await axios.post('http://localhost:4000/api/answers', surveyResponse);
       console.log('Survey response submitted successfully:', response.data);
       
       // Show alert on success
       setOpenAlert(true);
       
-      // Reset the form or navigate back to survey list
+      // Close dialog and reset the form or navigate back to survey list
       setTimeout(() => {
         setSelectedSurvey(null);
+        setOpenDialog(false); // Close the dialog
       }, 3000);
      
     } catch (error) {
@@ -60,132 +68,215 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
     setOpenAlert(false); // Close the alert
   };
 
+  const handleNext = () => {
+    if (currentQuestionIndex < selectedSurvey.questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1); // Move to the previous question
+    }
+  };
+
   // Check if all questions are answered
   const allQuestionsAnswered = selectedSurvey.questions.every(q => answers[q.questionId] !== undefined);
 
+  const currentQuestion = selectedSurvey.questions[currentQuestionIndex];
+
+  const CloseDialog = ()=> {
+    setOpenDialog(false);
+    setSelectedSurvey(null);
+  }
+
+  const handleQuestionSwitch = (index) => {
+    setCurrentQuestionIndex(index);
+  }
+
   return (
-    <div className='survey-container-file' >
-      <h1> Survey Name : {selectedSurvey.title}</h1>
-      <br />
-      <ul className="question-list-file">
-        {selectedSurvey.questions.map((q, index) => (
-          <div key={`${q.questionId}-${index}`} >
-            <p style={{fontSize:"28px"}}>{index + 1}. {q.text}</p>
-            <p>{q.questionType}</p>
+    <Dialog open={openDialog} onClose={CloseDialog} fullWidth 
+      PaperProps={{
+        style: {
+          width: `${window.Width}px`, 
+          height: '100%', // 90% of the window's width
+          border: "2px solid #015757",
+          backgroundColor: "#021717",
+          borderRadius: "15px",
+          color: "white",
+          padding: "10px",
+          marginLeft: "10px",
+          marginTop: "20px",
+          marginBottom: "20px",
+          textAlign: "left",
+        },
+      }}
+    >
+      <DialogTitle>{selectedSurvey.title}</DialogTitle>
+      <hr></hr>
+     
+      <DialogContent>
+        {/* Display radio buttons to switch questions */}
+       
 
-            {q.questionType === 'checkbox' && (
-              <FormControl component="fieldset">
-                <RadioGroup
-                  style={{color: 'white'}}
-                  name={`question-${q.questionId}`}
-                  value={answers[q.questionId] || ""}
-                  onChange={(e) => handleAnswerChange(q.questionId, e.target.value)}
-                  row
-                >
-                  {Array.from({ length: 11 }, (_, idx) => (
-                    <FormControlLabel
-                      style={{color: 'white'}}
-                      key={idx}
-                      control={<Radio style={{color: 'white'}} />}
-                      label={idx}
-                      value={idx}
-                    />
-                  ))}
-                </RadioGroup>
-              </FormControl>
-            )}
+        <br />
+        <p>{currentQuestion.text}</p>
+        <br />
 
-            {q.questionType === 'Boolean' && (
-              <FormControl component="fieldset">
-                <RadioGroup
-                  style={{color: 'white'}}
-                  name={`question-${q.questionId}`}
-                  value={answers[q.questionId] || ""}
-                  onChange={(e) => handleAnswerChange(q.questionId, e.target.value)}
-                  row
-                >
-                  <FormControlLabel
-                    style={{color: 'white'}}
-                    control={<Radio style={{color: 'white'}} />}
-                    label="Yes"
-                    value="Yes"
-                  />
-                  <FormControlLabel
-                    style={{color: 'white'}}
-                    control={<Radio style={{color: 'white'}} />}
-                    label="No"
-                    value="No"
-                  />
-                </RadioGroup>
-              </FormControl>
-            )}
+        {currentQuestion.questionType === 'checkbox' && (
+          <FormControl component="fieldset">
+            <RadioGroup
+              style={{ color: 'white',  }}
+              size="small"
+              name={`question-${currentQuestion.questionId}`}
+              value={answers[currentQuestion.questionId] || ""}
+              onChange={(e) => handleAnswerChange(currentQuestion.questionId, e.target.value)}
+              row
+            >
+              {Array.from({ length: 11 }, (_, idx) => (
+                <FormControlLabel
+                  key={idx}
+                  control={<Radio 
 
-            {q.questionType === 'feedback' && (
-              <FormControl component="fieldset">
-                <RadioGroup
-                  style={{color: 'white'}}
-                  name={`question-${q.questionId}`}
-                  value={answers[q.questionId] || ""}
-                  onChange={(e) => handleAnswerChange(q.questionId, e.target.value)}
-                  row
-                >
-                  <FormControlLabel
-                    style={{color: 'white'}}
-                    control={<Radio style={{color: 'white'}} />}
-                    label="Good"
-                    value="Good"
-                  />
-                  <FormControlLabel
-                    style={{color: 'white'}}
-                    control={<Radio style={{color: 'white'}} />}
-                    label="Bad"
-                    value="Bad"
-                  />
-                  <FormControlLabel
-                    style={{color: 'white'}}
-                    control={<Radio style={{color: 'white'}} />}
-                    label="Very Good"
-                    value="Very Good"
-                  />
-                </RadioGroup>
-              </FormControl>
-            )}
+                   
+                    
+                    size='small' style={{ color: 'white',fontSize:"5px" }} />}
+                  label={idx}
+                  value={idx}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        )}
 
-            <hr />
-          </div>
-        ))}
-      </ul>
-      <div className="button-group">
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={handleSubmit} 
-          disabled={!allQuestionsAnswered} // Disable if not all questions answered
-          sx={{ backgroundColor: !allQuestionsAnswered ? 'rgba(0, 0, 255, 0.6)' : undefined, textTransform: "none" }} // Semi-transparent blue
-        >
-          Submit Answers
-        </Button>
-        <Button 
-          variant="contained" 
-          onClick={() => setSelectedSurvey(null)} 
-          sx={{ marginLeft: '8px', textTransform: "none" }} // Add margin between buttons
-        >
-          Back to All Surveys
-        </Button>
+        {currentQuestion.questionType === 'Boolean' && (
+          <FormControl component="fieldset">
+            <RadioGroup
+              style={{ color: 'white' }}
+              name={`question-${currentQuestion.questionId}`}
+              value={answers[currentQuestion.questionId] || ""}
+              onChange={(e) => handleAnswerChange(currentQuestion.questionId, e.target.value)}
+              row
+            >
+              <FormControlLabel
+                style={{ color: 'white' }}
+                control={<Radio style={{ color: 'white' }} />}
+                label="Yes"
+                value="Yes"
+              />
+              <FormControlLabel
+                style={{ color: 'white' }}
+                control={<Radio style={{ color: 'white' }} />}
+                label="No"
+                value="No"
+              />
+            </RadioGroup>
+          </FormControl>
+        )}
+
+        {currentQuestion.questionType === 'feedback' && (
+          <FormControl component="fieldset">
+            <RadioGroup
+              style={{ color: 'white' }}
+              name={`question-${currentQuestion.questionId}`}
+              value={answers[currentQuestion.questionId] || ""}
+              onChange={(e) => handleAnswerChange(currentQuestion.questionId, e.target.value)}
+              row
+            >
+              <FormControlLabel
+                style={{ color: 'white' }}
+                control={<Radio style={{ color: 'white' }} />}
+                label="Good"
+                value="Good"
+              />
+              <FormControlLabel
+                style={{ color: 'white' }}
+                control={<Radio style={{ color: 'white' }} />}
+                label="Bad"
+                value="Bad"
+              />
+              <FormControlLabel
+                style={{ color: 'white' }}
+                control={<Radio style={{ color: 'white' }} />}
+                label="Very Good"
+                value="Very Good"
+              />
+            </RadioGroup>
+          </FormControl>
+        )}
+
+
+<br></br>
+
+
+
+      </DialogContent>
+
+      
+
+      <DialogActions style={{display:"flex" ,flexDirection:"column" ,gap:"10px"}}>
+
+
+      <FormControl component="fieldset">
+     
+     <RadioGroup
+       name="question-switch"
+       value={currentQuestionIndex}
+       onChange={(e) => handleQuestionSwitch(Number(e.target.value))}
+       row
+     >
+       {selectedSurvey.questions.map((q, index) => (
+         <FormControlLabel
+           key={q.questionId}
+           value={index}
+           control={<Radio size='small' style={{ color: 'white' }} />}
+         
+         />
+       ))}
+     </RadioGroup>
+   </FormControl>
+
+      <div>
+
+        {currentQuestionIndex < selectedSurvey.questions.length - 1 && (
+          <Button onClick={handleNext} style={{backgroundColor:"transparent",
+            border:"1px solid white",
+            borderRadius:"15px",
+            width:"150px",
+
+
+
+          }} 
+          variant="contained" color="primary">
+            Next
+          </Button>
+        )}
+
+        {currentQuestionIndex === selectedSurvey.questions.length - 1 && (
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            disabled={!allQuestionsAnswered}
+          >
+            Submit Answers
+          </Button>
+        )}
       </div>
 
-      {/* Snackbar for success alert */}
+      </DialogActions>
+
       <Snackbar
         open={openAlert}
-        autoHideDuration={3000} // Duration for alert visibility
+        autoHideDuration={3000}
         onClose={handleCloseAlert}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // Position of the alert
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
           You have completed the survey successfully!
         </Alert>
       </Snackbar>
-    </div>
+    </Dialog>
   );
 };
 

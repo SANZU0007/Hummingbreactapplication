@@ -98,7 +98,7 @@ const UserMoodOnDate = ({ employees }) => {
                 {moodData.length > 0 && (
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={moodData}>
-                            <XAxis dataKey="employeeName" />
+                            <XAxis />
                             <YAxis domain={[0, 100]} /> {/* Assuming mood score is between 0 and 10 */}
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip formatter={(value) => `${value} Mood`} />

@@ -8,7 +8,7 @@ import {
 import MuiAlert from "@mui/material/Alert";
 import "./usercheck.css";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import { LogoutOutlined } from "@mui/icons-material";
+import { Info, LogoutOutlined } from "@mui/icons-material";
 import UserFresh from "./UserFresh";
 import { apiUrl } from "../../api";
 
@@ -16,7 +16,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const UserCheckInUsers = () => {
+const UserCheckInUsers = ({activeComponent, loadComponent}) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [employeeId, setEmployeeId] = useState(user ? user._id : ""); // Ensure user exists
   const [message, setMessage] = useState("");
@@ -179,7 +179,7 @@ const UserCheckInUsers = () => {
           </span>
         )}
       </Button>
-
+       <Info onClick={() => loadComponent('CheckIn')} />
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}

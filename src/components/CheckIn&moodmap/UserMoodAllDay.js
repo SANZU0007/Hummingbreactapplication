@@ -47,8 +47,8 @@ const UserMoodAllDay = ({ employees }) => {
         { field: 'checkInDate', headerName: 'Check-In Date', width: 150 },  // New column for date
         { field: 'checkInTime', headerName: 'Check-In Time', width: 150 },  // Column for time only
         { field: 'checkOutTime', headerName: 'Check-Out Time', width: 150 },
-        { field: 'userMood', headerName: 'User Mood', width: 130 },
-        { field: 'earlyDispatch', headerName: 'Early Dispatch', width: 150 },
+        // { field: 'userMood', headerName: 'User Mood', width: 130 },
+        { field: 'earlyDispatch', headerName: 'Early Departures', width: 150 },
         { field: 'lateArrival', headerName: 'Late Arrival', width: 130 }
     ];
 

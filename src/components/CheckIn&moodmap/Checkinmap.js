@@ -31,7 +31,7 @@ const CheckInMap = () => {
     { field: 'mood', headerName: 'Mood', width: 130 },
     { field: 'checkedIn', headerName: 'Checked In', width: 120 },
     { field: 'checkedOut', headerName: 'Checked Out', width: 120 },
-    { field: 'earlyDispatch', headerName: 'Early Dispatch', width: 130 },
+    { field: 'earlyDispatch', headerName: 'Early Departures', width: 130 },
     { field: 'lateArrival', headerName: 'Late Arrival', width: 120 },
   ];
 

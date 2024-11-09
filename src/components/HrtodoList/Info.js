@@ -76,7 +76,7 @@ const Info = ({ employees}) => {
         <div className="stat-card">
           <div className="card-content">
             <h1>{earlyDispatchCount}</h1>
-            <Typography variant="body1">Early Dispatch</Typography>
+            <Typography variant="body1">Early Departures</Typography>
           </div>
           <EventAvailableIcon fontSize="large" />
         </div>

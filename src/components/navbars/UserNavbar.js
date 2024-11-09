@@ -122,18 +122,18 @@ export default function UserNavbar({activeComponent ,loadComponent}) {
         <List>
        
      
-        <div className="toolkit-sidebar-content">
-          {/* <img src="../images/humming-bee-logo.svg" className="toolkit-sidebar-title" /> */}
-          <div className={`toolkit-sidebar-link `}  style={{ cursor: "default", paddingBottom:"10px" }}>Menu</div>
+       
+
           
           {/* Buttons to switch between components */}
-          <div className={`toolkit-sidebar-link ${activeComponent === 'Dashboard' ? 'active' : ''}`} onClick={() => loadComponent('Graphs')}>Dashboard</div>
-          <div className={`toolkit-sidebar-link ${activeComponent === 'CheckIn' ? 'active' : ''}`} onClick={() => loadComponent('CheckIn')}> CheckIn</div>
+          <div  className="sidebar-logout" onClick={() => loadComponent('Graphs')}>Dashboard</div>
+         
+          {/* <div className={`toolkit-sidebar-link ${activeComponent === 'CheckIn' ? 'active' : ''}`} onClick={() => loadComponent('CheckIn')}> CheckIn</div> */}
               
-          <div className={`toolkit-sidebar-link ${activeComponent === 'AllSurveys' ? 'active' : ''}`} onClick={() => loadComponent('AllSurveys')}>Fill Survey</div>
+          {/* <div className={`toolkit-sidebar-link ${activeComponent === 'AllSurveys' ? 'active' : ''}`} onClick={() => loadComponent('AllSurveys')}>Fill Survey</div> */}
       
-        </div>
-        <div className="sidebar-logout">Logout</div>
+        <br></br>
+        <div className="sidebar-logout" onClick={()=> navigate('/')}>Logout</div>
   
         </List>
       </Drawer>

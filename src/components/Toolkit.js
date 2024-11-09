@@ -35,8 +35,8 @@ const Toolkit = () => {
 
       {activeComponent === 'AllSurveys' && <Survey />} 
 
-        {/* Rendering components based on the activeComponent state */}
-        {activeComponent === 'Graphs' && <Graphs />}
+      
+        {activeComponent === 'Graphs' && <Graphs activeComponent={activeComponent} loadComponent={loadComponent} />}
         {activeComponent === 'CheckIn' && <CheckInMap />}
       </div>
     </div>
