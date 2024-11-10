@@ -13,6 +13,8 @@ function SignUp() {
     team: ''
   });
 
+console.log(userData,)
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -104,10 +106,11 @@ function SignUp() {
               className={`input-box ${errors.role ? 'input-error' : ''}`}
               value={userData.role}
               onChange={(e) => setUserData({ ...userData, role: e.target.value })}
-              style={{backgroundColor:"transparent" ,color:"black"}}
+              style={{backgroundColor:"transparent" ,color:"#9B9B9B"}}
             >
               <option value="">Select Role</option>
               <option value="Employee">Employee</option>
+              <option value="TL">TL</option>
               <option value="HR">HR</option>
             </select>
             {errors.role && <div className="error-text">{errors.role}</div>}
@@ -119,7 +122,7 @@ function SignUp() {
               className={`input-box ${errors.team ? 'input-error' : ''}`}
               value={userData.team}
               onChange={(e) => setUserData({ ...userData, team: e.target.value })}
-              style={{backgroundColor:"transparent" ,color:"black"}}
+              style={{backgroundColor:"transparent" ,color:"#9B9B9B"}}
             >
               <option value="">Select Team</option>
               <option value="Development">Development</option>

@@ -88,7 +88,7 @@ const DiallyLoginMap = ({ employees }) => {
             </ResponsiveContainer>
         </Container>
        
-
+      
        <Daily  checkIns={checkIns}/>
 
         </>

@@ -1,0 +1,14 @@
+.gratitude-container{
+    background-color: black;
+    width: 450px;
+    padding:25px;
+    border-radius: 20px;
+
+}
+
+.tab{
+    color: rgb(35, 169, 169);
+    gap:10px;
+    margin-left: 10px;
+  
+}

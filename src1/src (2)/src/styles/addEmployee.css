@@ -1,0 +1,70 @@
+#add-emp {
+    background-color: #002525;
+    padding: 80px 100px;
+    color: white;
+    text-align: start;
+}
+
+input,
+input[type='text'],
+select {
+    background-color: transparent;
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+select option{
+    background-color: #002525;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading h1 {
+    font-size: 30px;
+}
+
+.heading button {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 7px;
+    border-radius: 7px;
+}
+
+.two-col {
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    align-items: center;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field h3 {
+    font-size: 20px;
+}
+
+form button {
+    background-color: transparent;
+    padding: 10px 15px;
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+@media screen and (max-width:720px) {
+    .two-col{
+        display: block;
+    }
+}

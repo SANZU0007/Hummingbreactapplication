@@ -1,0 +1,46 @@
+
+.survey-container {
+   
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.survey-title {
+    color: #ffffff; /* White text for the title */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.survey-list {
+    
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.survey-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f1f8e9; /* Light green for each survey item */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+.survey-item .MuiTypography-h6 {
+    color: #f7f7f7; /* Dark green color for the survey title */
+}
+
+button {
+    color: #ffffff; /* Ensure the text on buttons is white */
+    font-weight: bold;
+    text-transform: none; /* Prevent text from being capitalized */
+}
+
+
+

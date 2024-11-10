@@ -5,7 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 // import AdminUserMood from './AdminUserMood';
 import { apiUrl } from '../../api';
 
-const UserMoodAllDay = ({ employees }) => {
+const UserLogin = ({ employees }) => {
     const [checkInData, setCheckInData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -102,4 +102,4 @@ const UserMoodAllDay = ({ employees }) => {
     );
 };
 
-export default UserMoodAllDay;
+export default UserLogin ;

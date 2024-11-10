@@ -1,0 +1,49 @@
+/* info.css */
+
+.info-section {
+    /* margin-top: 50px; */
+    margin-left: 100px;
+    padding: 10px; /* Padding around the section */
+    border-radius: 8px; /* Rounded corners for the section */
+   
+}
+
+.card-group {
+    display: flex;
+    justify-content: space-between; /* Space out cards evenly */
+    margin-bottom: 20px; /* Space between groups */
+}
+
+.stat-card {
+    display: flex;
+    
+    padding: 20px; /* Increased padding for better spacing */
+    background: rgba(11, 11, 11, 0.374); /* Darker background for cards */
+    color: #ffffff; /* White text color */
+    border-radius: 8px; /* Rounded corners for cards */
+    flex: 1; /* Ensure cards take equal width */
+    margin: 0 10px; /* Space between cards */
+    border: 1px solid #a7ffd1;
+
+    width: 150px;
+
+    transition: transform 0.2s; /* Animation effect on hover */
+}
+
+.stat-card:hover {
+    transform: scale(1.05); /* Slightly enlarge card on hover */
+}
+
+.card-content {
+    flex: 1; /* Take up remaining space for the text */
+}
+
+h2 {
+    margin: 0; /* Remove default margin */
+    font-size: 0.5rem; /* Increase font size for visibility */
+}
+
+p {
+    margin: 0; /* Remove default margin */
+    font-size: 1rem; /* Set font size for description */
+}

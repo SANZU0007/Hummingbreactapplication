@@ -12,6 +12,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios'; // Import axios
 import "../../styles/todo.css";
+import { apiUrl } from '../../api';
 
 const PostTodo = ({GetTodoList}) => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -29,7 +30,7 @@ const PostTodo = ({GetTodoList}) => {
   };
 
 
-  const UserID = localStorage.getItem("user");
+  const UserID = JSON.parse(localStorage.getItem("user"))
 
   console.log(`User ID: ${UserID}`);
 
@@ -41,12 +42,12 @@ const PostTodo = ({GetTodoList}) => {
       status: 'In Progress', // Default status
       duration: 45, // Default duration
       completedDuration: 0, // Default completed duration
-      user: UserID , // Replace with actual user info
+      user: UserID._id , // Replace with actual user info
       role: 'Developer' // Replace with actual role info
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/tasks/create', taskData);
+      const response = await axios.post(`${apiUrl}/tasks/create`, taskData);
       console.log('Task added:', response.data);
       handleCloseDialog(); // Close the dialog after adding
       GetTodoList()
@@ -68,7 +69,19 @@ const PostTodo = ({GetTodoList}) => {
         </Fab>
       </div>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
+      <Dialog open={openDialog} onClose={handleCloseDialog}  
+      
+      fullWidth
+     
+      PaperProps={{
+        style: {
+          width: `${window.innerWidth}px`, // 90% of the window's width
+          // height: `${window.innerHeight * 0.9}px`, // 90% of the window's height
+         border:"2px solid #24554a"
+        },
+      }}
+      
+      >
         <DialogTitle 
           className='dialog-content'
           style={{ borderBottom: "1px solid white" }}
@@ -78,14 +91,14 @@ const PostTodo = ({GetTodoList}) => {
         
         <DialogContent className='dialog-content'>
           <br />
-          <div>
+          {/* <div>
             <DatePicker
               selected={startDate}
               onChange={handleDateChange}
               dateFormat="MM/dd/yyyy"
               className="border border-gray-300 rounded w-full p-2"
             />
-          </div>
+          </div> */}
           
           <div className="mb-2">
             <select
@@ -93,6 +106,7 @@ const PostTodo = ({GetTodoList}) => {
               name="priority"
               value={eventVal.priority}
               className="border border-gray-300 rounded w-full p-2"
+              style={{backgroundColor:"transparent" ,color:"#9B9B9B"}}
             >
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
@@ -113,7 +127,7 @@ const PostTodo = ({GetTodoList}) => {
           </div>
         </DialogContent>
         
-        <DialogActions className='dialog-footer'>
+        <DialogActions   className='dialog-footer'>
           <Button
             variant="contained"
             style={{ textTransform: "none", backgroundColor: "#002525" }}
