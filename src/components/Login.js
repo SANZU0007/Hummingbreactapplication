@@ -24,7 +24,7 @@ function Login() {
                 if(response.data.user.role == 'Employee'){
                    navigate('/takeSurvey/graphs')
                 }
-                if(response.data.user.role == 'TL'){
+                 else if(response.data.user.role == 'TL'){
                     navigate('/tldashboard')
                  } else{
                     navigate("/hrdashboard")

@@ -4,6 +4,7 @@ import Graphs from './Graphs'
 import UserNavbar from './navbars/UserNavbar';
 import Survey from '../componentssurvey/Survey';
 import CheckInMap from './CheckIn&moodmap/Checkinmap';
+import EditProfile from './user-settings/EditProfile';
 
 
 const Dashboard = () => <div className="content">Dashboard Component</div>;
@@ -34,6 +35,7 @@ const Toolkit = () => {
        
 
       {activeComponent === 'AllSurveys' && <Survey />} 
+      {activeComponent === 'EditProfile' && <EditProfile loadComponent={loadComponent} />} 
 
       
         {activeComponent === 'Graphs' && <Graphs activeComponent={activeComponent} loadComponent={loadComponent} />}

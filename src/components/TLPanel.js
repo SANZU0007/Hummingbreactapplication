@@ -22,13 +22,14 @@ const TLPanel = () => {
   
   const [employees, setEmployees] = useState([])
 
+
   const fetchEmployees = async () => {
     let userData = JSON.parse(localStorage.getItem('user'))
     try {
-      const response = await axios.get(`${apiUrl}/api/employees`);
-      setEmployees(response.data.filter((emp)=>{
+      const response = await axios.get(`${apiUrl}/api/users/team/${userData.team}`);
+      setEmployees(response.data.users) /* .filter((emp)=>{
         return emp.team == userData.team
-      }))
+      })) */
     } catch (err) {
       console.error('Error fetching employees:', err);
     }

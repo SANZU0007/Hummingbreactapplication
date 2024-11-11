@@ -9,6 +9,7 @@ import {
   Typography,
   IconButton,
   List,
+  Avatar,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -95,7 +96,10 @@ export default function UserNavbar({activeComponent ,loadComponent}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="body1" noWrap>
-            {user.name || 'Guest'}
+            {/* {user.name || 'Guest'} */}
+            <Avatar onClick={() => loadComponent('EditProfile')}>
+              {user.name[0].toUpperCase()}
+            </Avatar>
           </Typography>
         </Toolbar>
       </AppBar>

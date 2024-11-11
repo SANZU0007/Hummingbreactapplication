@@ -34,6 +34,7 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
     completed: false,
     author: auth?.loggedUser?._id || null,
     role: 'Admin',
+    team:JSON.parse(localStorage.getItem('user')).team
   });
 
   const [openDialog, setOpenDialog] = useState(false); // State to control dialog box
@@ -55,6 +56,8 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
     // };
     // fetchEmployees();
         setLoading(false);
+        console.log("HRTasjpost");
+        console.log(employees);
   }, []);
 
   const handleSelectChange = (event) => {

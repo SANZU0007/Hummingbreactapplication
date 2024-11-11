@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import '../styles/addEmployee.css';
+// import '../styles/addEmployee.css';
+import axios from 'axios';
+import { apiUrl } from '../../api';
 
-export default function AddEmployee() {
+export default function EditProfile({loadComponent}) {
+    const data = JSON.parse(localStorage.getItem('user'))
     const [employeeData, setEmployeeData] = useState({
-        empId: '',
-        name: '',
-        email: '',
-        mobile: '',
-        dob: '',
-        department: '',
-        employment: '',
-        photo: null,
-        password: '',
-        confirmPassword: ''
+        // empId: '',
+        name: data.name,
+        email: data.email,
+        // mobile: '',
+        // dob: '',
+        team: data.team,
+        role: data.role,
+        image: '',
+        password: ''
     });
 
     const handleInputChange = (e) => {
@@ -31,25 +33,27 @@ export default function AddEmployee() {
         }));
     };
 
-    const addEmployee = (e) => {
+    const addEmployee = async (e) => {
         e.preventDefault();
-        // Handle form submission
-        if (employeeData.password !== employeeData.confirmPassword) {
-            alert("Passwords do not match");
+        if (employeeData.password.length<8) {
+            alert("Password requires minimum 8 digits");
             return;
         }
-        console.log('Employee added:', employeeData);
-        // Handle further submission logic like API calls
+        // console.log('Employee added:', employeeData);
+        const response = await axios.put(`${apiUrl}/api/users/register/${data._id}`, employeeData);
+        console.log(response);
+        alert('Profile updated successfully')
+        loadComponent('Graphs')
     };
 
     return (
         <div id="add-emp">
             <div className="heading">
-                <h1>Add Employee</h1>
+                <h1>Edit Profile</h1>
                 <button onClick={() => alert('Close functionality to be implemented')}>Close</button>
             </div>
             <form onSubmit={addEmployee}>
-                <div className="field">
+                {/* <div className="field">
                     <h3>EmpId</h3>
                     <input
                         type="text"
@@ -58,7 +62,7 @@ export default function AddEmployee() {
                         onChange={handleInputChange}
                         placeholder="Enter Your EmpId"
                     />
-                </div>
+                </div> */}
                 <div className="two-col">
                     <div className="field">
                         <h3>Name</h3>
@@ -68,6 +72,7 @@ export default function AddEmployee() {
                             value={employeeData.name}
                             onChange={handleInputChange}
                             placeholder="Enter your Name"
+                            disabled
                         />
                     </div>
                     <div className="field">
@@ -78,9 +83,10 @@ export default function AddEmployee() {
                             value={employeeData.email}
                             onChange={handleInputChange}
                             placeholder="Enter your Email ID"
+                            disabled
                         />
                     </div>
-                    <div className="field">
+                    {/* <div className="field">
                         <h3>Mobile No.</h3>
                         <input
                             type="tel"
@@ -98,28 +104,33 @@ export default function AddEmployee() {
                             value={employeeData.dob}
                             onChange={handleInputChange}
                         />
-                    </div>
+                    </div> */}
                     <div className="field">
                         <h3>Department</h3>
                         <select
-                            name="department"
-                            value={employeeData.department}
+                            name="team"
+                            value={employeeData.team}
                             onChange={handleInputChange}
+                            disabled
                         >
+                            <option value="">Select Department</option>
                             <option value="Development">Development</option>
                             <option value="Management">Management</option>
                         </select>
                     </div>
                     <div className="field">
-                        <h3>Employment</h3>
+                        <h3>Role</h3>
                         <select
-                            name="employment"
-                            value={employeeData.employment}
+                            name="role"
+                            value={employeeData.role}
                             onChange={handleInputChange}
+                            disabled
                         >
-                            <option value="Full-time">Full-time</option>
-                            <option value="Part-time">Part-time</option>
-                            <option value="Intern">Intern</option>
+                            <option value="">Select Role</option>
+                            <option value="Employee">Employee</option>
+                            <option value="HR">HR</option>
+                            <option value="TL">TL</option>
+                            <option value="Administrator">Administrator</option>
                         </select>
                     </div>
                     <div className="field">
@@ -131,26 +142,14 @@ export default function AddEmployee() {
                             accept="image/*"
                         />
                     </div>
-                </div>
-                <div className="two-col">
                     <div className="field">
-                        <h3>Password</h3>
+                        <h3>Change Password</h3>
                         <input
                             type="password"
                             name="password"
                             value={employeeData.password}
                             onChange={handleInputChange}
-                            placeholder="Enter Password"
-                        />
-                    </div>
-                    <div className="field">
-                        <h3>Confirm Password</h3>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            value={employeeData.confirmPassword}
-                            onChange={handleInputChange}
-                            placeholder="Retype password"
+                            placeholder="Enter new Password"
                         />
                     </div>
                 </div>

@@ -43,7 +43,8 @@ const PostTodo = ({GetTodoList}) => {
       duration: 45, // Default duration
       completedDuration: 0, // Default completed duration
       user: UserID._id , // Replace with actual user info
-      role: 'Developer' // Replace with actual role info
+      role: 'Developer', // Replace with actual role info
+      team:JSON.parse(localStorage.getItem('user')).team
     };
 
     try {
