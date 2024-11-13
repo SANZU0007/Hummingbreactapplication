@@ -26,6 +26,7 @@ import Timer from "./todo/Timer";
 import ChangeStatus from "./todo/ChangeStatus";
 import { deleteAllGoals, EditAllGoals, fetchAllTask } from "../ApiService/api";
 import { fetchAllGoals } from "./ApiService/api";
+import Hrtaskpost from "./HrtodoList/Hrtaskpost";
 
 const DeleteButton = styled(IconButton)`
   color: #008080;
@@ -34,7 +35,7 @@ const DeleteButton = styled(IconButton)`
   }
 `;
 
-function Todo() {
+function Todo({employees ,setEmployees}) {
   const auth = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
@@ -123,6 +124,16 @@ console.log(tasks);
          
          </div>
         </div>
+
+   {UserID.role == "TL" && (
+
+<Hrtaskpost employees={employees} setEmployees={setEmployees}/>
+
+   )}
+
+        
+
+
 
         <PostTodo GetTodoList={GetTodoList} />
       </div>

@@ -11,7 +11,7 @@ import Gratitudes from "./Gratitude/Gratitude";
 import UserFresh from "./checkinusers/UserFresh";
 import WishingUser from "./checkinusers/WishingUser";
 
-function Graphs({activeComponent, loadComponent}) {
+function Graphs({activeComponent, loadComponent , employees ,setEmployees }) {
   const UserID = localStorage.getItem('user');
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -22,7 +22,7 @@ function Graphs({activeComponent, loadComponent}) {
 
 
         <div style={{ display: "flex", flexDirection: "column", textAlign: "start", alignItems: "flex-start", marginLeft: "35px", marginRight: "25px" }}>
-          <h1 className="header-name" >Hi {user.username || "Guest"} 👋</h1>
+          <h1 className="header-name" >Hi {user.name || "Guest"} 👋</h1>
 
           <p>
             We're thrilled to see you again. Dive into your personalized dashboard
@@ -45,7 +45,7 @@ function Graphs({activeComponent, loadComponent}) {
 
         <WishingUser activeComponent={activeComponent} loadComponent={loadComponent}   />
 
-        <Todo />
+        <Todo  employees={employees} setEmployees={setEmployees} />
       </div>
 
 

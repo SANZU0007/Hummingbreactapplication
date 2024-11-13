@@ -35,7 +35,7 @@ const Compose = () => {
     setAlert({ severity: '', message: '' }); // Reset alert
 
     try {
-      const response = await axios.post("http://localhost:4000/api/messages/", payload);
+      const response = await axios.post("https://adminuserwebapi.onrender.com/api/messages/", payload);
       console.log("Message sent:", response.data);
       
       // Clear the input fields after sending the message

@@ -62,7 +62,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function TLNavbar({ activeComponent, loadComponent }) {
+export default function AdminNavbar({ activeComponent, loadComponent }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -96,7 +96,7 @@ export default function TLNavbar({ activeComponent, loadComponent }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="body1" noWrap>
-            {user.user || 'Guest'}
+            {user.name || 'Guest'}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -127,7 +127,7 @@ export default function TLNavbar({ activeComponent, loadComponent }) {
                 <div className='sidebar-title'>HummingBEE</div>
                 <div className='sidebar-links' style={{ cursor: "default" }}>Menu</div>
                 <div className={`sidebar-links ${activeComponent == "TLProfile" ? 'active-compo' : ''}`} onClick={() => loadComponent('TLProfile')}>Dashboard</div>
-                <div className={`sidebar-links ${activeComponent == "TLLeavsesAndAttendance" ? 'active-compo' : ''}`} onClick={() => loadComponent('TLLeavesAndAttendance')}>Leave & Attendance</div>
+                {/* <div className={`sidebar-links ${activeComponent == "TLLeavsesAndAttendance" ? 'active-compo' : ''}`} onClick={() => loadComponent('TLLeavesAndAttendance')}>Leave & Attendance</div> */}
                 <div className={`sidebar-links ${activeComponent == "AddEmployee" ? 'active-compo' : ''}`} onClick={() => loadComponent('AddEmployee')}>Add Employee</div>
               </div>
               <div onClick={handleLogout} className='sidebar-logout'>Logout</div>

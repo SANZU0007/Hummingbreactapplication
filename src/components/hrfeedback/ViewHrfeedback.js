@@ -12,7 +12,7 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 import DeleteIcon from '@mui/icons-material/Delete'; // Import Delete icon
 import { apiUrl } from '../../api';
 
-const ViewHrfeedback = ({}) => {
+const ViewHrfeedback = ({fetchNotices}) => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -47,6 +47,7 @@ const ViewHrfeedback = ({}) => {
         messageStatus: newStatus,
       });
       fetchAllFeedback(); // Refresh the feedback list after updating
+      fetchNotices()
     } catch (error) {
       console.error('Error updating feedback:', error);
     }
@@ -57,6 +58,7 @@ const ViewHrfeedback = ({}) => {
     try {
       await axios.delete(`${apiUrl}/api/feedback/${id}`);
       fetchAllFeedback(); // Refresh the feedback list after deletion
+      fetchNotices()
     } catch (error) {
       console.error('Error deleting feedback:', error);
     }
@@ -66,10 +68,20 @@ const ViewHrfeedback = ({}) => {
     <div>
       <Button   style={{ textTransform: "none", backgroundColor: "#FFFFFF", color: "#002525" ,marginLeft:"3px" }} 
           variant="contained"  onClick={handleOpenDialog}>
-        View All Notice
+        Edit
       </Button>
 
-      <Dialog open={open} onClose={handleCloseDialog} maxWidth="md" fullWidth>
+      <Dialog open={open} onClose={handleCloseDialog} maxWidth="md" fullWidth
+      
+      PaperProps={{
+        style: {
+          
+          color:"white",
+          backgroundColor: "#002525",
+        },
+      }}
+     
+      >
         <DialogTitle>All Feedback Details</DialogTitle>
         <DialogContent>
           {feedbackList.length === 0 ? (

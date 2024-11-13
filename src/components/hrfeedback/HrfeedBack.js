@@ -8,12 +8,13 @@ import {
   DialogTitle,
   Snackbar,
   Alert,
+  Divider,
 } from '@mui/material';
 import "./hrfeedback.css";
 import ViewHrfeedback from './ViewHrfeedback';
 import { apiUrl } from '../../api';
 
-export const HrfeedBack = () => {
+export const HrfeedBack = ({fetchNotices}) => {
   const [personId] = useState('user123'); // Default person ID, can be dynamic if needed
   const [message, setMessage] = useState('');
   const [messageStatus] = useState(true); // Assuming true for feedback
@@ -35,6 +36,14 @@ export const HrfeedBack = () => {
   };
 
   const handleFeedbackSubmit = async () => {
+
+
+     if(!message){
+      window.alert("please enter a Your message")
+      return;
+
+     }
+
     const feedbackPayload = {
       personid: personId,
       message: message,
@@ -43,10 +52,11 @@ export const HrfeedBack = () => {
 
     try {
       const response = await axios.post(`${apiUrl}/api/feedback`, feedbackPayload);
-      setSnackbarMessage(`${response.data.message} posted successfully`);
+      setSnackbarMessage("new message added the notice Board");
       setSnackbarSeverity('success');
       setSnackbarOpen(true);
       setOpen(false); // Close the dialog after successful submission
+      fetchNotices()
     } catch (error) {
       setSnackbarMessage('Please delete previous Message, or Pin the Message');
       setSnackbarSeverity('error');
@@ -60,26 +70,46 @@ export const HrfeedBack = () => {
     <div>
       <Button   style={{ textTransform: "none", backgroundColor: "#FFFFFF", color: "#002525",marginLeft:"3px" }} 
           variant="contained" onClick={handleOpen}>
-        NoticeBoard 
+        Create
       </Button>
      
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>HR Feedback</DialogTitle>
+      <Dialog open={open} onClose={handleClose}
+      maxWidth="md" fullWidth
+       PaperProps={{
+        style: {
+          
+          color:"white",
+          backgroundColor: "#002525",
+        },
+      }}
+      
+      
+      >
+        <DialogTitle style={{borderBottom:"1px solid white"}}>Create NoticeBoard Message</DialogTitle>
+
+
+       <br></br>
         <DialogContent>
-          <p>Please enter your feedback:</p>
+          <p>Please enter your Message:</p>
           <input
             type="text"
             placeholder="Enter your feedback"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+            style={{ width: '100%', padding: '8px', marginBottom: '10px',
+
+          backgroundColor:"transparent"
+
+             }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant="outlined" style={{ padding: '8px 16px', marginRight: '8px' }}>
+          <Button
+          
+          onClick={handleClose} variant="outlined" style={{ padding: '8px 16px', marginRight: '8px',textTransform:"none" }}>
             Cancel
           </Button>
-          <Button onClick={handleFeedbackSubmit} variant="contained" color="primary" style={{ padding: '8px 16px' }}>
+          <Button onClick={handleFeedbackSubmit} variant="contained" color="primary" style={{ padding: '8px 16px',textTransform:"none" }}>
             Submit Feedback
           </Button>
         </DialogActions>

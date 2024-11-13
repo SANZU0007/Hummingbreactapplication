@@ -17,7 +17,8 @@ import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import LandingPage from './components/Home/LandingPage';
 import { apiUrl } from './api';
-import TLPanel from './components/TLPanel';
+import TLPanel from './components/TLcomponnents/TLPanel';
+import AdminPanel from './components/Admin/AdminPanel';
 
 export const UserContext = createContext()
 
@@ -60,6 +61,8 @@ function App() {
               <Route path='/requestleave' element={<Requestleave />} />
               <Route path='/leaveview' element={<LeaveView />} />
               <Route path='/tldashboard' element={<TLPanel />} />
+
+              <Route path='/Admindashboard' element={<AdminPanel />} />
             </Routes>
           </Authprovider>
         </Router>

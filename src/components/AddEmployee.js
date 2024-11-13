@@ -3,7 +3,7 @@ import '../styles/addEmployee.css';
 import axios from 'axios';
 import { apiUrl } from '../api';
 
-export default function AddEmployee() {
+export default function AddEmployee({loadComponent}) {
     const [employeeData, setEmployeeData] = useState({
         // empId: '',
         name: '',
@@ -40,6 +40,8 @@ export default function AddEmployee() {
         // }
         // console.log('Employee added:', employeeData);
         const response = await axios.post(`${apiUrl}/api/users/register`, employeeData);
+
+        window.alert("Add successfully new User")
         console.log(response);
 
     };
@@ -48,7 +50,7 @@ export default function AddEmployee() {
         <div id="add-emp">
             <div className="heading">
                 <h1>Add Employee</h1>
-                <button onClick={() => alert('Close functionality to be implemented')}>Close</button>
+                <button onClick={() => loadComponent('TLProfile') }>Close</button>
             </div>
             <form onSubmit={addEmployee}>
                 {/* <div className="field">
@@ -110,7 +112,9 @@ export default function AddEmployee() {
                         >
                             <option value="">Select Department</option>
                             <option value="Development">Development</option>
-                            <option value="Management">Management</option>
+              <option value="Management">Management</option>
+              <option value="Design">Design</option>
+              <option value="Team">Team</option>
                         </select>
                     </div>
                     <div className="field">

@@ -96,7 +96,7 @@ export default function Navbar({ activeComponent, loadComponent }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="body1" noWrap>
-            {user.username || 'Guest'}
+            {user.name || 'Guest'}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -129,7 +129,7 @@ export default function Navbar({ activeComponent, loadComponent }) {
                 <div className={`sidebar-links ${activeComponent == "HRDashboard" ? 'active-compo' : ''}`} onClick={() => loadComponent('HRDashboard')}>Dashboard</div>
                 <div className={`sidebar-links ${activeComponent == "HRLeavesAndAttendance" ? 'active-compo' : ''}`} onClick={() => loadComponent('HRLeavesAndAttendance')}>Leave & Attendance</div>
                 <div className={`sidebar-links ${activeComponent == "CreateSurvey" ? 'active-compo' : ''}`} onClick={() => loadComponent('CreateSurvey')}> Create Survey</div>
-                <div className={`sidebar-links ${activeComponent == "AllSurveys" ? 'active-compo' : ''}`} onClick={() => loadComponent('AllSurveys')}>Survey Response</div>
+                <div className={`sidebar-links ${activeComponent == "AllSurveys" ? 'active-compo' : ''}`} onClick={() => loadComponent('AllSurveysResponse')}>Survey Response</div>
               </div>
               <div onClick={handleLogout} className='sidebar-logout'>Logout</div>
             </div>

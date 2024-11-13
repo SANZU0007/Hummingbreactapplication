@@ -7,6 +7,9 @@ import SurveyForm from '../componentssurvey/CreateSurvey';
 import SurveyResponse from '../componentssurvey/SurveyResponse';
 import axios from 'axios';
 import { apiUrl } from '../api';
+import Graphs from './Graphs';
+import Survey from '../componentssurvey/Survey';
+import CheckInMap from './CheckIn&moodmap/Checkinmap';
 
 
 const Sidebar = () => {
@@ -38,14 +41,24 @@ const Sidebar = () => {
   return (
     <>
         <Navbar loadComponent={loadComponent} activeComponent={activeComponent}/>
+        <div className="main-toolkit-content" style={{marginLeft: isSidebarOpen?'250px':''}}>
+         
 
         {activeComponent === 'CreateSurvey' && <SurveyForm employees={employees} setEmployees={setEmployees} />}
+
+
+        {activeComponent === 'HRDashboard' && <Graphs loadComponent={loadComponent} employees={employees} setEmployees={setEmployees} />}
  
-        {activeComponent === 'HRDashboard' && <HRDashboard employees={employees} setEmployees={setEmployees} />}
+        {/* {activeComponent === 'HRDashboard' && <HRDashboard employees={employees} setEmployees={setEmployees} />} */}
+
+        {activeComponent === 'CheckIn' && <CheckInMap />}
+
+        {activeComponent === 'AllSurveys' && <Survey/>} 
 
         {activeComponent === 'HRLeavesAndAttendance' && <HRLeavesAndAttendance  employees={employees} setEmployees={setEmployees} />} 
        
-        {activeComponent === 'AllSurveys' && <SurveyResponse  employees={employees} setEmployees={setEmployees} />} 
+        {activeComponent === 'AllSurveysResponse' && <SurveyResponse  employees={employees} setEmployees={setEmployees} />} 
+        </div>
   
     </>
   );

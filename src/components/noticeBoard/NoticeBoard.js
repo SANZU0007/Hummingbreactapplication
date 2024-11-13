@@ -10,6 +10,8 @@ import {
   Divider,
 } from '@mui/material';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import HrfeedBack from '../hrfeedback/HrfeedBack';
+import ViewHrfeedback from '../hrfeedback/ViewHrfeedback';
 
 const NoticeBoard = () => {
   const [notices, setNotices] = useState([]);
@@ -30,6 +32,8 @@ const NoticeBoard = () => {
   }, []);
 
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
 
   return (
   
@@ -41,9 +45,21 @@ const NoticeBoard = () => {
         <h4  className="notice-title">
           Notice Board
         </h4>
-        <h4  className="notice-title2">
-          View All
-        </h4>
+
+        { }
+        <div style={{display:"flex"}}>
+
+          {user.role == "HR" &&(
+            <>
+              <HrfeedBack fetchNotices={fetchNotices} />
+              <ViewHrfeedback fetchNotices={fetchNotices} />
+            </>
+          )
+          }
+
+      
+
+        </div>
 
         </div>
 

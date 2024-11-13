@@ -14,6 +14,9 @@ import Alert from '@mui/material/Alert'; // Import Alert
 import "./hrtask.css";
 import { useAuth } from '../../utils/auth';
 import { apiUrl } from '../../api';
+import TLDashAttendance from '../TLcomponnents/TlDashAttendance';
+import { RemoveRedEyeRounded } from '@mui/icons-material';
+import { Tooltip } from 'recharts';
 
 const Hrtaskpost = ({ employees, setEmployees }) => {
   const dispatch = useDispatch();
@@ -38,6 +41,9 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
   });
 
   const [openDialog, setOpenDialog] = useState(false); // State to control dialog box
+
+
+  const [openDialogTask, setOpenDialogTask] = useState(false); // State to control dialog box
 
   // Fetch employee details
   useEffect(() => {
@@ -126,18 +132,52 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
     return <div style={{ color: 'white' }}>{error}</div>;
   }
 
+
+
+  const handleCloseTask = () => setOpenDialogTask(false)
+  const handleopenTask = () => setOpenDialogTask(true)
+
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <h1 className='dashboard-heading-ptag'> TL DASHBOARD</h1>
+      
         <Button 
           style={{ textTransform: "none", backgroundColor: "#FFFFFF", color: "#002525" ,marginTop:"5px" }} 
           variant="contained" 
           color="primary" 
           onClick={handleOpenDialog}
         >
-          Add Task
+          Add Goals for TeamMates
         </Button>
+       
+     
+     
+        <RemoveRedEyeRounded fontSize='large' titleAccess='View All TeamMate Goals' 
+        style={{marginLeft:"10px"}}
+         onClick={handleopenTask}/>
+   
+       
+
+        <Dialog 
+        
+        fullWidth="lg"
+        maxWidth='lg'
+   
+        
+        
+        open={openDialogTask} onClose={handleCloseTask}>
+          <DialogTitle className='dialog-title'>TeamMates Task</DialogTitle>
+
+          <TLDashAttendance employees={employees} setEmployees={setEmployees}/>
+        
+         
+        </Dialog>
+
+
+
+
+
+
 
         <Dialog open={openDialog} onClose={handleCloseDialog}>
           <DialogTitle className='dialog-title'>Add Task</DialogTitle>
@@ -156,14 +196,14 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
                   </option>
                 ))}
               </select>
-              <div className="pick-date">
+              {/* <div className="pick-date">
                 <DatePicker
                   selected={startDate}
                   onChange={handleDateChange}
                   dateFormat="MM/dd/yyyy"
                   className="date-picker"
                 />
-              </div>
+              </div> */}
               <select 
                 onChange={handleChange} 
                 value={eventVal.priority} 

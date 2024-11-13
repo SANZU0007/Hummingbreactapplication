@@ -1,42 +1,57 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 import '../styles/signup.css';
 import { apiUrl } from '../api';
 
 function Login() { 
     const [logUserData, setlogUserData] = useState({ email: '', password: '' });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
-    const location = useLocation();
+
+    // Email validation function
+    const validateEmail = (email) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(''); // Reset error message
+
+        // Check email format
+        if (!validateEmail(logUserData.email)) {
+            setError("Please enter a valid email address.");
+            return;
+        }
+
+        setLoading(true); // Start loading
         try {
             const response = await axios.post(`${apiUrl}/api/users/login`, {
                 email: logUserData.email,
                 password: logUserData.password,
             });
 
-           
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            const userRole = response.data.user.role;
 
-                if(response.data.user.role == 'Employee'){
-                   navigate('/takeSurvey/graphs')
-                }
-                 else if(response.data.user.role == 'TL'){
-                    navigate('/tldashboard')
-                 } else{
-                    navigate("/hrdashboard")
-                }
-
-                
-                
-               
-           
+            if(userRole === 'Employee'){
+                navigate('/takeSurvey/graphs');
+            } else if(userRole === 'TL'){
+                // Navigate to TL dashboard or add a route as required
+            } else if(userRole === 'Administrator'){
+                navigate('/Admindashboard');
+            } else {
+                navigate("/hrdashboard");
+            }
         } catch (error) {
-            // Handle any unexpected errors
-            console.error("Login failed. Please try again.", error);
+            console.error("Login failed:", error);
+            setError("Login failed. Please check your email and password.");
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
@@ -45,6 +60,14 @@ function Login() {
             <div className='content'>
                 <div className='heading-1'>Humming BEE</div>
                 <div className='heading-2'>Login Here</div>
+                
+                {/* Display Error Alert if there's an error */}
+                {error && (
+                    <Alert severity="error" className="alert-box">
+                        {error}
+                    </Alert>
+                )}
+                
                 <form className='form-container' onSubmit={handleSubmit}>
                     <div className='signup-input-container'>
                         <div className='input-label'>Email</div>
@@ -68,13 +91,13 @@ function Login() {
                             required
                         />
                     </div>
-                    <button type="submit" className='sub-btn'>Submit</button>
-                    <div className='link-container'>
-                        <br></br>
-                        <Link to="/Signup" className='register-link'>
-                            Don't have an account? Register Here
-                        </Link>
-                    </div>
+                    
+                    {/* Show loading spinner while submitting */}
+                    <button type="submit" className='sub-btn' disabled={loading}>
+                        {loading ? <CircularProgress size={24} color="inherit" /> : "Submit"}
+                    </button>
+                    
+                  
                 </form>
             </div>
         </div>
