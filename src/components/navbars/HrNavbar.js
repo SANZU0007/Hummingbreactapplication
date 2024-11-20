@@ -96,7 +96,7 @@ export default function Navbar({ activeComponent, loadComponent }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="body1" noWrap>
-            {user.name || 'Guest'}
+          {user.name || 'Guest'} -  {user.companyName || 'Guest'}
           </Typography>
         </Toolbar>
       </AppBar>

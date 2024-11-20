@@ -21,7 +21,7 @@ const Receive = () => {
         setMessages(response.data);
       } catch (error) {
         console.error("Error fetching messages:", error);
-        setError('Failed to load messages. Please try again.');
+       
       } finally {
         setLoading(false);
       }

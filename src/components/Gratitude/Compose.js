@@ -3,6 +3,7 @@ import axios from 'axios';
 import { UserContext } from '../../App';
 import { Alert, CircularProgress } from '@mui/material';
 import "./compose.css"
+import { apiUrl } from '../../api';
 
 const Compose = () => {
   // State variables to hold user inputs and UI state
@@ -35,7 +36,7 @@ const Compose = () => {
     setAlert({ severity: '', message: '' }); // Reset alert
 
     try {
-      const response = await axios.post("https://adminuserwebapi.onrender.com/api/messages/", payload);
+      const response = await axios.post( `${apiUrl}/api/messages/`, payload);
       console.log("Message sent:", response.data);
       
       // Clear the input fields after sending the message

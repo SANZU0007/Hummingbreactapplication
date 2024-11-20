@@ -18,8 +18,9 @@ const NoticeBoard = () => {
 
   // Function to fetch all notices from the API
   const fetchNotices = async () => {
+    const User = JSON.parse(localStorage.getItem('user'));
     try {
-      const response = await axios.get(`${apiUrl}/api/feedback`);
+      const response = await axios.get(`${apiUrl}/api/feedback/${User.companyName}`);
       setNotices(response.data);
     } catch (error) {
       console.error('Error fetching notices:', error);
@@ -49,7 +50,8 @@ const NoticeBoard = () => {
         { }
         <div style={{display:"flex"}}>
 
-          {user.role == "HR" &&(
+          {
+          (user.role == "HR" || user.role == "Administrator" )&&(
             <>
               <HrfeedBack fetchNotices={fetchNotices} />
               <ViewHrfeedback fetchNotices={fetchNotices} />

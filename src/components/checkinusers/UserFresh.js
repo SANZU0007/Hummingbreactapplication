@@ -52,6 +52,7 @@ useEffect(()=>{
         await axios.put(`${apiUrl}/api/attendance/update-mood`, {
           employeeId,
           mood: newValue,
+          companyName:JSON.parse(localStorage.getItem('user')).companyName
         });
 
         fetchCheckInByUser();

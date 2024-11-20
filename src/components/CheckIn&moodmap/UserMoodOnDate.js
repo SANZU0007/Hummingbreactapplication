@@ -103,7 +103,7 @@ const UserMoodOnDate = ({ employees }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip formatter={(value) => `${value} Mood`} />
                             <Legend verticalAlign="bottom" align="center" />
-                            <Bar dataKey="userMood" fill="#2278c1" barSize={50} />
+                            <Bar dataKey="userMood" fill="#00897b" barSize={50} />
                         </BarChart>
                     </ResponsiveContainer>
                 )}

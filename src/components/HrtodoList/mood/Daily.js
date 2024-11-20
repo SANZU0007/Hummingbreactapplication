@@ -34,7 +34,7 @@ const Daily = ({ checkIns }) => {
           <YAxis domain={[0, 100]} /> {/* Set Y-axis range from 0 to 100 */}
           <Tooltip />
           <Legend />
-          <Bar dataKey="averageMood" fill="#8884d8" />
+          <Bar dataKey="averageMood"   fill="#00897b" />
         </BarChart>
       </ResponsiveContainer>
     </div>

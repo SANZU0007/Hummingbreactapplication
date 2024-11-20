@@ -69,14 +69,14 @@ const CheckInMap = () => {
                 color: 'black',
               },
               '& .MuiDataGrid-row': {
-                backgroundColor: '#1e1e1e',
+                backgroundColor: '#00897b',
                 color: 'white',
               },
               '& .MuiDataGrid-row:hover': {
                 backgroundColor: '#333',
               },
               '& .MuiDataGrid-footerContainer': {
-                backgroundColor: 'black',
+                backgroundColor: '#00897b',
                 color: 'white',
               },
               '& .MuiTablePagination-root': {

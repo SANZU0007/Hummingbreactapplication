@@ -36,7 +36,7 @@ const TLPanel = () => {
   const fetchEmployees = async () => {
     let userData = JSON.parse(localStorage.getItem('user'))
     try {
-      const response = await axios.get(`${apiUrl}/api/users/team/${userData.team}`);
+      const response = await axios.get(`${apiUrl}/api/users/team/${userData.team}/${userData.companyName}`);
       setEmployees(response.data.users) /* .filter((emp)=>{
         return emp.team == userData.team
       })) */

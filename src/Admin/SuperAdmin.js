@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
-import '../styles/addEmployee.css';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { apiUrl } from '../api';
+import "../styles/addEmployee.css";
 import { Alert, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { apiUrl } from '../api';
 
-export default function AddEmployee({ loadComponent }) {
+export default function SuperAdmin() {
     const [employeeData, setEmployeeData] = useState({
         name: '',
         email: '',
         team: '',
         role: '',
         password: '',
-        companyName: JSON.parse(localStorage.getItem('user')).companyName || "Humming Bee"
+        companyName: ''
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [companyOptions, setCompanyOptions] = useState([]); // State to store fetched companies
+
+    useEffect(() => {
+        // Fetch company names from API on component mount
+        const fetchCompanyNames = async () => {
+            try {
+                const response = await axios.get(`${apiUrl}/companies/names`);
+                setCompanyOptions(response.data.companyNames); // Assuming API response structure
+            } catch (err) {
+                console.error("Error fetching company names:", err);
+                setError("Failed to load company names. Please try again.");
+            }
+        };
+
+        fetchCompanyNames();
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -27,14 +43,14 @@ export default function AddEmployee({ loadComponent }) {
 
     const addEmployee = async (e) => {
         e.preventDefault();
-        setLoading(true);  // Start loading
-        setError('');      // Clear previous error
+        setLoading(true); // Start loading
+        setError(''); // Clear previous error
 
         try {
             const response = await axios.post(`${apiUrl}/api/users/register`, employeeData);
             alert("User added successfully!");
             console.log(response);
-            loadComponent('TLProfile'); // Close form on success
+        
         } catch (err) {
             setError(err.response?.data?.message || "An error occurred. Please try again.");
             console.error("Error adding employee:", err);
@@ -47,7 +63,6 @@ export default function AddEmployee({ loadComponent }) {
         <div id="add-emp">
             <div className="heading">
                 <h1>Add Employee</h1>
-                <button onClick={() => loadComponent('TLProfile')}>Close</button>
             </div>
             <form onSubmit={addEmployee}>
                 {/* Display error message using Material-UI Alert with a close button */}
@@ -128,6 +143,21 @@ export default function AddEmployee({ loadComponent }) {
                             onChange={handleInputChange}
                             placeholder="Enter Password"
                         />
+                    </div>
+                    <div className="field">
+                        <h3>Company</h3>
+                        <select
+                            name="companyName"
+                            value={employeeData.companyName}
+                            onChange={handleInputChange}
+                        >
+                            <option value="">Select Company</option>
+                            {companyOptions.map((company, index) => (
+                                <option key={index} value={company}>
+                                    {company}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
                 <button type="submit" disabled={loading}>

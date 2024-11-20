@@ -48,6 +48,7 @@ export const HrfeedBack = ({fetchNotices}) => {
       personid: personId,
       message: message,
       messageStatus: messageStatus,
+      companyName:JSON.parse(localStorage.getItem('user')).companyName
     };
 
     try {

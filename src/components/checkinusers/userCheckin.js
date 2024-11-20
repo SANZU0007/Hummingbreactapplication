@@ -48,6 +48,7 @@ const UserCheckInUsers = ({activeComponent, loadComponent}) => {
         `${apiUrl}/api/attendance/checkin`,
         {
           employeeId,
+          companyName:user.companyName
         }
       );
       setMessage(response.data.message);
@@ -76,6 +77,7 @@ const UserCheckInUsers = ({activeComponent, loadComponent}) => {
         `${apiUrl}/api/attendance/checkout`,
         {
           employeeId,
+          companyName:user.companyName
         }
       );
       setMessage(response.data.message);
@@ -150,7 +152,7 @@ const UserCheckInUsers = ({activeComponent, loadComponent}) => {
         )}
       </Button>
 
-       <UserFresh fetchCheckInByUser={fetchCheckInByUser }  employeeId={employeeId} checkInData={checkInData}/>
+       <UserFresh /* fetchCheckInByUser={fetchCheckInByUser } */  employeeId={employeeId} checkInData={checkInData}/>
 
       <Button
         size="small"

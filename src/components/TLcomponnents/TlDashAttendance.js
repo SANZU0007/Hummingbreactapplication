@@ -36,9 +36,9 @@ const User = JSON.parse(localStorage.getItem('user'));
   console.log(tasks)
 
   const getAllTasks = async () => {
-    const response = await fetchAllTask();
+    const response = await fetchAllTask(User.companyName);
 
-    const formattedData = response.map(item => {
+    const formattedData = response.tasks.map(item => {
       const matchedEmployee = employees.find(emp => emp._id === item.user);
 
       return {
@@ -67,19 +67,7 @@ const User = JSON.parse(localStorage.getItem('user'));
   return (
     <>
       <div className="dashboard-container">
-        {/* <div class="hr-heading">
-          <div className="hr-heading-container">
-            <div class="hr-icon">HummingBEE</div>
-            <div class="lines">
-              <div class="hr-line"></div>
-              <div class="hr-line"></div>
-              <div class="hr-line"></div>
-              <div class="hr-line"></div>
-              <div class="hr-line"></div>
-            </div>
-          </div>
-        </div> */}
-        {/* <Hrtaskpost employees={employees} setEmployees={setEmployees} /> */}
+       
 
         <div className="view-tasks">
          

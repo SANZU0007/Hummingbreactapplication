@@ -24,7 +24,7 @@ import "../styles/todo.css";
 import PostTodo from "./todo/PostTodo";
 import Timer from "./todo/Timer";
 import ChangeStatus from "./todo/ChangeStatus";
-import { deleteAllGoals, EditAllGoals, fetchAllTask } from "../ApiService/api";
+import { deleteAllGoals, EditAllGoals, fetchAllTask, fetchCurrentLoginUserTask } from "../ApiService/api";
 import { fetchAllGoals } from "./ApiService/api";
 import Hrtaskpost from "./HrtodoList/Hrtaskpost";
 
@@ -36,6 +36,7 @@ const DeleteButton = styled(IconButton)`
 `;
 
 function Todo({employees ,setEmployees}) {
+  
   const auth = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
@@ -49,17 +50,15 @@ function Todo({employees ,setEmployees}) {
 console.log(tasks);
 
   const GetTodoList = async () => {
-   
     try {
-      const response = await fetchAllTask();
-      setTasks(response.filter(task => task.user == UserID._id));
+      const response = await fetchCurrentLoginUserTask(UserID._id);
+      setTasks(response);
     } catch (err) {
       console.error("Error updating goal:", err);
     }
   };
 
   useEffect(()=>{
-
     GetTodoList()
   },[])
 
@@ -125,11 +124,10 @@ console.log(tasks);
          </div>
         </div>
 
-   {UserID.role == "TL" && (
+        {(UserID.role === "TL" || UserID.role === "Administrator") && (
+   <Hrtaskpost employees={employees} setEmployees={setEmployees}/>
+)}
 
-<Hrtaskpost employees={employees} setEmployees={setEmployees}/>
-
-   )}
 
         
 

@@ -96,7 +96,7 @@ export default function TLNavbar({ activeComponent, loadComponent }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="body1" noWrap>
-            {user.user || 'Guest'}
+          {user.name || 'Guest'} -  {user.companyName || 'Guest'}
           </Typography>
         </Toolbar>
       </AppBar>

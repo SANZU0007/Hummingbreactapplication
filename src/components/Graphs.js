@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
 import "../styles/graphs.css";
-import { apiUrl } from "../api";
-import axios from "axios";
+
 import Todo from "./Todo";
 
 import UserCheckInUsers from "./checkinusers/userCheckin";
 import NoticeBoard from "./noticeBoard/NoticeBoard";
 import Gratitudes from "./Gratitude/Gratitude";
-import UserFresh from "./checkinusers/UserFresh";
+
 import WishingUser from "./checkinusers/WishingUser";
 
 function Graphs({activeComponent, loadComponent , employees ,setEmployees }) {
-  const UserID = localStorage.getItem('user');
+
+
 
   const user = JSON.parse(localStorage.getItem("user"));
   return (

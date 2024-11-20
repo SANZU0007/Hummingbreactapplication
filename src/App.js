@@ -19,6 +19,8 @@ import LandingPage from './components/Home/LandingPage';
 import { apiUrl } from './api';
 import TLPanel from './components/TLcomponnents/TLPanel';
 import AdminPanel from './components/Admin/AdminPanel';
+import SuperAdmin from './Admin/SuperAdmin';
+import AddCompany from './Admin/CompanyRegister';
 
 export const UserContext = createContext()
 
@@ -52,7 +54,9 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/Home' element={<LandingPage />} />
               <Route path='/takeSurvey' element={<RequireAuth><Survey /></RequireAuth>} />
-              <Route path='/takeSurvey/graphs' element={<RequireAuth><Toolkit /></RequireAuth>} />
+              <Route path='/takeSurvey/graphs' element={
+                <Toolkit />
+                } />
               <Route path='/signup' element={<SignUp />} />
               <Route path='/login' element={<Login />} />
               <Route path='/onboarding' element={<RequireAuth><ThankYou /></RequireAuth>} />
@@ -63,6 +67,10 @@ function App() {
               <Route path='/tldashboard' element={<TLPanel />} />
 
               <Route path='/Admindashboard' element={<AdminPanel />} />
+
+
+              <Route path='/SuperAdmin' element={<SuperAdmin />} />
+              <Route path='/AddCompany' element={<AddCompany />} />
             </Routes>
           </Authprovider>
         </Router>

@@ -5,6 +5,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './sent.css'; // Ensure this CSS file exists
 import { NavigateBefore, NavigateNext } from '@mui/icons-material';
+import { apiUrl } from '../../api';
 
 const Sent = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -16,11 +17,11 @@ const Sent = () => {
   useEffect(() => {
     const fetchSentMessages = async () => {
       try {
-        const response = await axios.get(`https://adminuserwebapi.onrender.com/api/messages/sending/${user._id}`);
+        const response = await axios.get(`${apiUrl}/api/messages/sending/${user._id}`);
         setSentMessages(response.data);
       } catch (error) {
         console.error("Error fetching sent messages:", error);
-        setError('Failed to load sent messages. Please try again.');
+        // setError('Failed to load sent messages. Please try again.');
       } finally {
         setLoading(false);
       }

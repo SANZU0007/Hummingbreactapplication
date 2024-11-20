@@ -19,6 +19,7 @@ import { RemoveRedEyeRounded } from '@mui/icons-material';
 import { Tooltip } from 'recharts';
 
 const Hrtaskpost = ({ employees, setEmployees }) => {
+  
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,26 +46,7 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
 
   const [openDialogTask, setOpenDialogTask] = useState(false); // State to control dialog box
 
-  // Fetch employee details
-  useEffect(() => {
-    // const fetchEmployees = async () => {
-    //   try {
-    //     const response = await axios.get(`${apiUrl}/api/employees`);
-    //     setEmployees(response.data.filter((x)=>{
-    //       return x.team == "Development"
-    //     }));
-    //     setLoading(false);
-    //   } catch (err) {
-    //     console.error('Error fetching employees:', err);
-    //     setError('Failed to load employee data');
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchEmployees();
-        setLoading(false);
-        console.log("HRTasjpost");
-        console.log(employees);
-  }, []);
+
 
   const handleSelectChange = (event) => {
     const employeeId = event.target.value;
@@ -75,13 +57,7 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
     }));
   };
 
-  const handleDateChange = (date) => {
-    setStartDate(date);
-    setEventVal((prevState) => ({
-      ...prevState,
-      date: date,
-    }));
-  };
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -124,13 +100,7 @@ const Hrtaskpost = ({ employees, setEmployees }) => {
     setOpenSnackbar(false); // Close the snackbar
   };
 
-  if (loading) {
-    return <div style={{ color: 'white' }}>Loading...</div>;
-  }
-
-  if (error) {
-    return <div style={{ color: 'white' }}>{error}</div>;
-  }
+ 
 
 
 

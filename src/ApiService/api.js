@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { apiUrl } from '../api';
 
+
+let User = JSON.parse(localStorage.getItem('user'))
+
+console.log(User)
+
+
 export const EditAllGoals = async (goalId, updatedGoal) => {
   const response = await axios.put(`${apiUrl}/tasks/updateTask/${goalId}`, updatedGoal); // Adjust the endpoint as necessary
   return response.data; // Return the updated goal data or any relevant info
@@ -19,15 +25,29 @@ export const deleteAllGoals = async (goalId) => {
 const API_URL = `${apiUrl}/api/goals`; // Replace with your actual API endpoint
 
 // Function to fetch all goals
-export const fetchAllTask = async () => {
+export const fetchAllTask = async (companyName) => {
   try {
-    const response = await axios.get(`${apiUrl}/tasks/all`);
+    const response = await axios.get(`${apiUrl}/tasks/all/${companyName}`);
     console.log(response.data);
     return response.data; // Return the fetched data
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : error.message);
   }
 };
+
+
+export const fetchCurrentLoginUserTask = async (user) => {
+  try {
+    const response = await axios.get(`${apiUrl}/tasks/user/${user}`);
+    console.log(response.data);
+    return response.data; // Return the fetched data
+  } catch (error) {
+    throw new Error(error.response ? error.response.data.message : error.message);
+  }
+};
+
+
+
 
 const API_URL_User = `${apiUrl}/api/users/`
 
@@ -175,10 +195,12 @@ export const LoginUser = async (payload) => {
 const API_URLs = `${apiUrl}`; // Replace with your actual API endpoint
 
 
-// Function to fetch all surveys
+
 export const fetchAllSurveys = async () => {
+  let User = JSON.parse(localStorage.getItem('user'))
+
   try {
-    const response = await axios.get(`${API_URLs}/api/surveys`);
+    const response = await axios.get(`${API_URLs}/api/company/${User.companyName}`);
     return response.data; // Return the fetched data
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : error.message);
@@ -188,7 +210,7 @@ export const fetchAllSurveys = async () => {
 
 export const fetchAllAnswer = async () => {
   try {
-    const response = await axios.get(`${API_URLs}/api/answers`);
+    const response = await axios.get(`${API_URLs}/api/answers/${User.companyName}`);
     return response.data; // Return the fetched data
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : error.message);

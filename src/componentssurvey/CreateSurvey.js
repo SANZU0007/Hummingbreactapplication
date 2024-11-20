@@ -42,6 +42,7 @@ const SurveyForm = () => {
     const surveyPayload = {
       title,
       questions,
+      companyName:JSON.parse(localStorage.getItem('user')).companyName
     };
 
     try {

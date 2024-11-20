@@ -13,13 +13,17 @@ import DeleteIcon from '@mui/icons-material/Delete'; // Import Delete icon
 import { apiUrl } from '../../api';
 
 const ViewHrfeedback = ({fetchNotices}) => {
+
   const [feedbackList, setFeedbackList] = useState([]);
   const [open, setOpen] = useState(false);
 
   // Function to fetch all feedback from the API
   const fetchAllFeedback = async () => {
+    
+    const User = JSON.parse(localStorage.getItem('user'));
+
     try {
-      const response = await axios.get(`${apiUrl}/api/feedback`);
+      const response = await axios.get(`${apiUrl}/api/feedback/${User.companyName}`);
       setFeedbackList(response.data);
     } catch (error) {
       console.error('Error fetching feedback:', error);

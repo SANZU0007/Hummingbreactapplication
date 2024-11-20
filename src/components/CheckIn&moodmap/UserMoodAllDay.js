@@ -81,13 +81,13 @@ const UserLogin = ({ employees }) => {
                         color: 'white',
                     },
                     '& .MuiDataGrid-row': {
-                        backgroundColor: '#1e1e1e',
+                        backgroundColor: '#00897b',
                     },
                     '& .MuiDataGrid-row:hover': {
                         backgroundColor: '#333',
                     },
                     '& .MuiDataGrid-footerContainer': {
-                        backgroundColor: 'black',
+                        backgroundColor: '#00796b',
                         color: 'white',
                     },
                     '& .MuiTablePagination-root': {

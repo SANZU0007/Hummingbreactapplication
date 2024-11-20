@@ -41,6 +41,7 @@ function Login() {
             if(userRole === 'Employee'){
                 navigate('/takeSurvey/graphs');
             } else if(userRole === 'TL'){
+                navigate("/tldashboard");
                 // Navigate to TL dashboard or add a route as required
             } else if(userRole === 'Administrator'){
                 navigate('/Admindashboard');

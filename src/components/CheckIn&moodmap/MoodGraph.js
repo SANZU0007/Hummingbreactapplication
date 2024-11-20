@@ -87,7 +87,7 @@ const MoodGraph = ({ checkInData }) => {
 
                     <Tooltip formatter={(value) => [`Mood: ${value}`]} contentStyle={{ backgroundColor: '#333', color: '#fff' }} /> {/* Format tooltip */}
                     <Legend wrapperStyle={{ color: '#fff' }} />
-                    <Bar dataKey="mood" fill="#8884d8" barSize={30}>
+                    <Bar dataKey="mood" fill="#00897b" barSize={30}>
                         <LabelList 
                             dataKey="mood" 
                             content={({ x, y, value }) => (

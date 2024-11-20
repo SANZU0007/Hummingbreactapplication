@@ -99,6 +99,7 @@ export default function UserNavbar({activeComponent ,loadComponent}) {
             {/* {user.name || 'Guest'} */}
             <Avatar onClick={() => loadComponent('EditProfile')}>
               {user.name[0].toUpperCase()}
+              {user.companyName || 'Guest'}
             </Avatar>
           </Typography>
         </Toolbar>

@@ -339,8 +339,11 @@ function HRLeavesAndAttendance({ employees }) {
           {selectedOption === "month" && <MonthlyLoginMap employees={employees} />}
         </Container>
 
-        <UserMoodAllDay employees={employees} />
         <UserMoodOnDate employees={employees} />
+        <div className='map-bar'>
+        <UserMoodAllDay employees={employees} />
+        </div>
+      
       </div>
     </div>
   );

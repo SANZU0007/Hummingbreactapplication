@@ -30,7 +30,7 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
     }));
   };
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  const User = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = async () => {
     try {
@@ -38,7 +38,8 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
         Title: selectedSurvey.title,
         userId: 1, // Use the user ID passed as a prop
         surveyId: selectedSurvey._id,
-        username: 'Unknown User',
+        username: User.name,
+        companyName: User.companyName,
         questions: selectedSurvey.questions.map((q) => ({
           questionId: q.questionId,
           text: q.text,
@@ -47,7 +48,7 @@ const SurveyAnswerForm = ({ selectedSurvey, setSelectedSurvey, userId }) => {
       };
 
       // Send the data using axios
-      const response = await axios.post('http://localhost:4000/api/answers', surveyResponse);
+      const response = await axios.post('https://adminuserwebapi.onrender.com/api/answers', surveyResponse);
       console.log('Survey response submitted successfully:', response.data);
       
       // Show alert on success

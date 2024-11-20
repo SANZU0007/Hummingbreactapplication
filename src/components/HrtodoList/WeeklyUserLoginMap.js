@@ -102,7 +102,7 @@ const WeeklyUserLoginMap = ({ employees }) => {
                     <Legend verticalAlign="bottom" align="center" />
                     <Bar
                         dataKey="percentage"
-                        fill="#2278c1"
+                        fill="#00897b"
                         barSize={50}
                     />
                 </BarChart>

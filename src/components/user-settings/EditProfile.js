@@ -14,7 +14,8 @@ export default function EditProfile({loadComponent}) {
         team: data.team,
         role: data.role,
         image: '',
-        password: ''
+        password: '',
+        // companyName:data.companyName
     });
 
     const handleInputChange = (e) => {
@@ -116,6 +117,8 @@ export default function EditProfile({loadComponent}) {
                             <option value="">Select Department</option>
                             <option value="Development">Development</option>
                             <option value="Management">Management</option>
+                            <option value="Design">Design</option>
+                            <option value="Team">Team</option>
                         </select>
                     </div>
                     <div className="field">
