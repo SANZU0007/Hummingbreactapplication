@@ -5,6 +5,7 @@ import { Alert, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { apiUrl } from '../api';
 
+
 export default function SuperAdmin() {
     const [employeeData, setEmployeeData] = useState({
         name: '',
