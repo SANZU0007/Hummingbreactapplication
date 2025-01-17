@@ -24,6 +24,7 @@ import AddCompany from './Admin/CompanyRegister';
 
 export const UserContext = createContext()
 
+
 function App() {
   const [userDetails, setUserDetails] = useState([]);
 
